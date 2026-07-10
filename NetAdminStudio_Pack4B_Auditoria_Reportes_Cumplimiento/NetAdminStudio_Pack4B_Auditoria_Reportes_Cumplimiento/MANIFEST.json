@@ -1,0 +1,177 @@
+[
+  {
+    "path": "02_ARQUITECTURA/AUDIT_EVENT_MODEL.md",
+    "bytes": 661,
+    "sha256": "4bbdfff7a4024f392313501c947259278960f9091d7aad37db06ddf7e9451345"
+  },
+  {
+    "path": "02_ARQUITECTURA/AUDIT_OVERVIEW.md",
+    "bytes": 791,
+    "sha256": "7719aee703468b24231b53ad7a8fff654cae6427bb6abb6904b0e5b73e27a6d4"
+  },
+  {
+    "path": "02_ARQUITECTURA/COMPLIANCE_ENGINE.md",
+    "bytes": 750,
+    "sha256": "742be212ad79227ff24483a2af3e48785218004d888e4434d25e1e23d3e53535"
+  },
+  {
+    "path": "02_ARQUITECTURA/HISTORY_TIMELINE.md",
+    "bytes": 598,
+    "sha256": "e2fdcbf483bfc797adc88ef46e50df4e465476f7568d75b51c4111e0f0e2f3c6"
+  },
+  {
+    "path": "02_ARQUITECTURA/IMMUTABILITY_AND_INTEGRITY.md",
+    "bytes": 624,
+    "sha256": "cb3eeea6ba43eeb72f757ee2f528ff02446fe5d6c9419cdaeaf6de22a9738262"
+  },
+  {
+    "path": "02_ARQUITECTURA/REPORT_ENGINE.md",
+    "bytes": 508,
+    "sha256": "43a79d40f75eec334901265be7e098776c144c4552d08c983a2f574eea2caf35"
+  },
+  {
+    "path": "02_ARQUITECTURA/REPORT_SCHEDULER.md",
+    "bytes": 431,
+    "sha256": "da70859487c952d1339e50a2a17e6ab065f2f00d7842f17748fdcf055f45376b"
+  },
+  {
+    "path": "02_ARQUITECTURA/RETENTION_AND_ARCHIVE.md",
+    "bytes": 458,
+    "sha256": "5377dde6ec1a3a88a9a1440d6f9e8cb57ffccfcf8ca82ebfc92c19c15f14ddac"
+  },
+  {
+    "path": "03_DATABASE/INDEX_AND_RETENTION_NOTES.md",
+    "bytes": 302,
+    "sha256": "0ba4757a6cb016199a9370b5aef0056f45ce6165a9c74019d189d8c810f50b4a"
+  },
+  {
+    "path": "03_DATABASE/MIGRATION_4B.sql",
+    "bytes": 3817,
+    "sha256": "763ef8f1541c260717e65ad0fe2d3283d55fdb07532cfc20a6d5ea5e8ed4fef0"
+  },
+  {
+    "path": "04_UI/AUDIT_CENTER.md",
+    "bytes": 418,
+    "sha256": "a71f7a81b5460a848ad7f825dd9e9551416ac36b7b51555e4e23b175d53d30cf"
+  },
+  {
+    "path": "04_UI/COMPLIANCE_DASHBOARD.md",
+    "bytes": 343,
+    "sha256": "bb26b8441bf59001a933966eab1804e061f9e67af15edae3be80b3af552c9c11"
+  },
+  {
+    "path": "04_UI/ENTITY_HISTORY.md",
+    "bytes": 263,
+    "sha256": "f50578a66a5267e970b099b9f2ff37ead93c3d791f59cee54f01162edf3b3857"
+  },
+  {
+    "path": "04_UI/REPORT_BUILDER.md",
+    "bytes": 253,
+    "sha256": "147beea66cdadd5572bd170c6d55495529e74c5ff1f0f0c14060637a7d660b5f"
+  },
+  {
+    "path": "04_UI/REPORT_CENTER.md",
+    "bytes": 365,
+    "sha256": "ca79bba67a8a1372d74dd8e651ae049261f2a86622fd93a60c84a07d15421955"
+  },
+  {
+    "path": "07_TESTING/ACCEPTANCE_CHECKLIST.md",
+    "bytes": 532,
+    "sha256": "7c74d109f9a6317bd4d7d0aa9093c8240c5f96dd58ff15228940a84a2e291477"
+  },
+  {
+    "path": "07_TESTING/TEST_PLAN.md",
+    "bytes": 803,
+    "sha256": "6d3b152d144d1ca5ffb04cf3319625c309fcc1740349c00121e4a278e574e151"
+  },
+  {
+    "path": "08_PROMPTS/060_IMPLEMENTAR_PACK_4B.md",
+    "bytes": 919,
+    "sha256": "7ca00b82aaaee7e8d9f6d5d023a73504a9e5e09e7d383e987ad8107b52efd80f"
+  },
+  {
+    "path": "08_PROMPTS/061_REVISAR_PACK_4B.md",
+    "bytes": 582,
+    "sha256": "bbb31415aa5960532daaeb7d18ebcffd422be8faff27ac24b6fc6a3ae214ea88"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0034_AUDITORIA_APPEND_ONLY.md",
+    "bytes": 115,
+    "sha256": "001cfc2d31931c8da08a859f2b742922e2dbdf0e55febcf21f5a981502bdfdf8"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0035_HASH_DE_EVENTOS.md",
+    "bytes": 115,
+    "sha256": "5d802cc8427a7df52dd774a251f64315426eac67c71b8989af8f1fd890a6da71"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0036_REPORTES_REPRODUCIBLES.md",
+    "bytes": 169,
+    "sha256": "de0f163e7c9c70efe16837673eae9687f57c0083e0f87c8adc61508723b7e2f0"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0037_REGLAS_VERSIONADAS.md",
+    "bytes": 146,
+    "sha256": "d437f9e5ced5429ac71ccf9c4355b00b47c68a77329f94a9e378f893972a3beb"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0038_RETENCION_POR_CATEGORIA.md",
+    "bytes": 119,
+    "sha256": "099f392fc4203999ba4fc337fbdd4690dafe605d4c1e63a419620bd17789ad13"
+  },
+  {
+    "path": "10_MOCKUPS/AUDIT_CENTER_ASCII.md",
+    "bytes": 1603,
+    "sha256": "48267d905a326df56e51b7e4fd4a30e2e09dddd9087d75691ac75eff92603e6f"
+  },
+  {
+    "path": "10_MOCKUPS/COMPLIANCE_ASCII.md",
+    "bytes": 1263,
+    "sha256": "a51c6d4bdb4e950f2fcd91e8a5d683ec1bb7ac864fe6f4cdc5f1b0783f5246d8"
+  },
+  {
+    "path": "10_MOCKUPS/REPORT_CENTER_ASCII.md",
+    "bytes": 1277,
+    "sha256": "c9b89fb4d31a6abc5734ef473ff20d77adf794afd8e875f03bc69176ff255627"
+  },
+  {
+    "path": "12_CONTRACTS/AUDIT_API.md",
+    "bytes": 213,
+    "sha256": "e6484a428dd3573bbc3569408df72670968e6d090c9e9b5df88500400efc0059"
+  },
+  {
+    "path": "12_CONTRACTS/COMPLIANCE_API.md",
+    "bytes": 174,
+    "sha256": "8154207b675ad1cdc8f466f57a9b19f60c8703c1d110e4b2303b326c54d396e0"
+  },
+  {
+    "path": "12_CONTRACTS/EVENTS.md",
+    "bytes": 259,
+    "sha256": "ee64c530483833f566a99fe924edbbd815869c4d0cee4fa70b791e34ef519933"
+  },
+  {
+    "path": "12_CONTRACTS/REPORT_API.md",
+    "bytes": 248,
+    "sha256": "d77b0ef41d98b922ceb90453995cf27b42c52221b38431c655ccd49021810e78"
+  },
+  {
+    "path": "13_SECURITY/SECURITY_MODEL.md",
+    "bytes": 527,
+    "sha256": "b1a1254da529b2cc5a03dc694aa679513d1ed0940d6cb21a9bf99a0693da9c5a"
+  },
+  {
+    "path": "14_OPERATIONS/OPERATION_GUIDE.md",
+    "bytes": 470,
+    "sha256": "deff2f8879216d5019fa9e22e7d3fbc24808d055d78eefc1f8689f704b859ca8"
+  },
+  {
+    "path": "CHANGELOG.md",
+    "bytes": 202,
+    "sha256": "33f57f90144481ae85e3b62ae7dd55fcc217dacca8c5b08e64c772eb7eb86898"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1550,
+    "sha256": "940d2ae9a50277c4b1d5d8cefc5f704b1ed314322cb29a402811e53daf3fd1a8"
+  }
+]
