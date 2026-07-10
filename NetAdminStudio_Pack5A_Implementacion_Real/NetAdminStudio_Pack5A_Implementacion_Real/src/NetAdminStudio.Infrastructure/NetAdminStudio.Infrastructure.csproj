@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NetAdminStudio.Application\NetAdminStudio.Application.csproj" />
+    <ProjectReference Include="..\NetAdminStudio.Domain\NetAdminStudio.Domain.csproj" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.7" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,257 @@
+[
+  {
+    "path": ".gitignore",
+    "bytes": 75,
+    "sha256": "8f7bad7cd7167a66955fab59a25cade9149e1c84b374c978a956fa67a0d47355"
+  },
+  {
+    "path": "Directory.Build.props",
+    "bytes": 172,
+    "sha256": "cd91f25740d405f68ea08433e460e615e2ce0d9c23cba2c948d7792a528d31d2"
+  },
+  {
+    "path": "NetAdminStudio.sln",
+    "bytes": 4041,
+    "sha256": "469671084f2fef5856681f120b6dc45095a687df29688fd9c8786eb6f004c217"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1181,
+    "sha256": "e8e92bcf0a58439ec7c42e7bb67a70db089dbd66e54410e0fb3c19104eca1c61"
+  },
+  {
+    "path": "docs/API.md",
+    "bytes": 298,
+    "sha256": "58e15655d11b904147dec6e0ea9f59727dbe6f45d9fce7aaf51fbff5fcbed244"
+  },
+  {
+    "path": "docs/ARCHITECTURE.md",
+    "bytes": 405,
+    "sha256": "2e74b6597dd55b938e56784f72523b79149d2fa9a5071fd5eb0e902570974cb0"
+  },
+  {
+    "path": "docs/INTEGRATION.md",
+    "bytes": 347,
+    "sha256": "e5120d1ae27ff2f7e4ab421ca6340860e95c71e4753df5fecaadc6780f6de3c0"
+  },
+  {
+    "path": "docs/NEXT_STEPS.md",
+    "bytes": 288,
+    "sha256": "f178d72461288e95ab62a3fbc68d181a5ade85036ee35eccfd5884558c0722a7"
+  },
+  {
+    "path": "global.json",
+    "bytes": 80,
+    "sha256": "1fdeb1b73953b98c28deda19adc5fea29f21712fe925ec208457eff1c093b107"
+  },
+  {
+    "path": "scripts/build.ps1",
+    "bytes": 121,
+    "sha256": "fb634dce843397d757d15a27bf4ade0f21e12f4e20439ef9a6f71f1506d90ef9"
+  },
+  {
+    "path": "scripts/restore.ps1",
+    "bytes": 114,
+    "sha256": "0ab1912963e9a5f9e2a97e37ea65f6d47f03276ce242e5a02bbd49a54f2ce8be"
+  },
+  {
+    "path": "scripts/run-agent.ps1",
+    "bytes": 82,
+    "sha256": "2001763ec69cfc952acdbf0fc6bdb05b65bb27dd000193487a503ed2f5b320c6"
+  },
+  {
+    "path": "scripts/run-all.ps1",
+    "bytes": 455,
+    "sha256": "a77cdf213f7974c56d36ea1fcfca397b0fdc99318688427498fa01749bdfaaa6"
+  },
+  {
+    "path": "scripts/run-api.ps1",
+    "bytes": 80,
+    "sha256": "d539c6cb6c67b62d92780c47987798d924ef6624bddbd4e9b65936b684f02dc4"
+  },
+  {
+    "path": "scripts/run-desktop.ps1",
+    "bytes": 84,
+    "sha256": "8e387d87dced24235aa07d4e1c8f734f152ac4c0d443ca36e3e8f20d8dda1c6b"
+  },
+  {
+    "path": "scripts/test.ps1",
+    "bytes": 111,
+    "sha256": "bacdff1276450bd0d9d97648a01c2540aafcdf696267a7c4f41ca7613e3e3da3"
+  },
+  {
+    "path": "scripts/validate.ps1",
+    "bytes": 374,
+    "sha256": "a304ffca0e4c3b95d5d8c005d1cf3299b3357ee5aa7024ece8d711189244de72"
+  },
+  {
+    "path": "src/NetAdminStudio.Agent/NetAdminStudio.Agent.csproj",
+    "bytes": 244,
+    "sha256": "507aebb5c692aa437646e0ac7ed568d50eaa7dadda002a3ed7c5d0ba37e65778"
+  },
+  {
+    "path": "src/NetAdminStudio.Agent/Program.cs",
+    "bytes": 370,
+    "sha256": "4539ded9c28b595de4709931e78148d3f82232efaf8295860db26ff5bdae4a1d"
+  },
+  {
+    "path": "src/NetAdminStudio.Agent/Worker.cs",
+    "bytes": 931,
+    "sha256": "bf12cd1b63ce739a8e38d8d99eecdba78cbfccbdccc91ef566c42805603d3371"
+  },
+  {
+    "path": "src/NetAdminStudio.Agent/appsettings.json",
+    "bytes": 44,
+    "sha256": "82fd1363eb03b9950db007f7c6b7c42f94b67d4d563110b7291de5bce26fe6ee"
+  },
+  {
+    "path": "src/NetAdminStudio.Api/NetAdminStudio.Api.csproj",
+    "bytes": 439,
+    "sha256": "5775096647d33a3042fc069738c7759719d14616f5bee5d13b5ae8f006163193"
+  },
+  {
+    "path": "src/NetAdminStudio.Api/Program.cs",
+    "bytes": 3236,
+    "sha256": "2dd121a552ea31fe15b32b8bdc95dcd704544437d95e9f9a2c31cbd20008b474"
+  },
+  {
+    "path": "src/NetAdminStudio.Api/appsettings.json",
+    "bytes": 154,
+    "sha256": "049d92849e7b489a9e4ccaf3c236c7b5375862ae6ecf2d9a4f596c6b2ee7abf8"
+  },
+  {
+    "path": "src/NetAdminStudio.Application/Abstractions/Ports.cs",
+    "bytes": 1202,
+    "sha256": "62cddf7f58350f4f572ab8865530b5890e948789e31d6cc54bd3e2954cc0f295"
+  },
+  {
+    "path": "src/NetAdminStudio.Application/Assistant/OperationsAssistant.cs",
+    "bytes": 1975,
+    "sha256": "f4ceb4286d28f315dcaafc9af51301d4fb9a58cf536ea11e22d4f502e0285cde"
+  },
+  {
+    "path": "src/NetAdminStudio.Application/Dashboard/DashboardService.cs",
+    "bytes": 1075,
+    "sha256": "c7808d9ad4736d1d41e96c6b821ec7a185a60b529869969e154646122a1b4b99"
+  },
+  {
+    "path": "src/NetAdminStudio.Application/DependencyInjection.cs",
+    "bytes": 536,
+    "sha256": "c69d1ba819b9b6e7e4f41f3a21bb3f57edd98b2da74d7f758d60369e51428ecb"
+  },
+  {
+    "path": "src/NetAdminStudio.Application/Monitoring/MonitoringService.cs",
+    "bytes": 1188,
+    "sha256": "59944120d7e9b59ef9df105005c1e997634cf9a2ec804c2993019df2372503af"
+  },
+  {
+    "path": "src/NetAdminStudio.Application/NetAdminStudio.Application.csproj",
+    "bytes": 246,
+    "sha256": "6432efbb7e3edf8ea99952c9d242fb23e88315fe6273cc0de9641eadf6ef284e"
+  },
+  {
+    "path": "src/NetAdminStudio.Desktop/App.xaml",
+    "bytes": 1624,
+    "sha256": "688a8903e6c02eb8401eb82d07d2d913f9c8139c421967281dbb504e00e04760"
+  },
+  {
+    "path": "src/NetAdminStudio.Desktop/App.xaml.cs",
+    "bytes": 1050,
+    "sha256": "33e7a0de3d58a633ca40699f2a62a38c1c65bee75bda17323b8d9d956977eef1"
+  },
+  {
+    "path": "src/NetAdminStudio.Desktop/MainWindow.xaml",
+    "bytes": 10415,
+    "sha256": "e8d6f209994a34eb7673c99c43297b65e4ea687a28148e205dbb0349d7295061"
+  },
+  {
+    "path": "src/NetAdminStudio.Desktop/MainWindow.xaml.cs",
+    "bytes": 364,
+    "sha256": "bbc5aa55dbd4d8df3ad53fc40ceb6959d065a75f7878b232879e08b3a87a1d30"
+  },
+  {
+    "path": "src/NetAdminStudio.Desktop/NetAdminStudio.Desktop.csproj",
+    "bytes": 438,
+    "sha256": "0636ee3814494b276fa83b85fc8125a36e84428fde2a8545316a3c5941ac50b5"
+  },
+  {
+    "path": "src/NetAdminStudio.Desktop/Services/NetAdminApiClient.cs",
+    "bytes": 2342,
+    "sha256": "46fcd916d33868721cf34eea9f9416ab01fd790cf00db92c8b68ddfd55ab7828"
+  },
+  {
+    "path": "src/NetAdminStudio.Desktop/ViewModels/MainViewModel.cs",
+    "bytes": 2176,
+    "sha256": "71a961c170b1daad05b48319c428a3ba935cac517b122efff63896daa633c86b"
+  },
+  {
+    "path": "src/NetAdminStudio.Domain/Alerts/Alert.cs",
+    "bytes": 805,
+    "sha256": "e88c36a6d847490ca6942a65e1daaf839097d0136b6b3d5907da0c964e961838"
+  },
+  {
+    "path": "src/NetAdminStudio.Domain/Assets/NetworkAsset.cs",
+    "bytes": 1143,
+    "sha256": "743e11677fea56daa7d3784978c26c01d3a2351ce5fb287a73a4e15e3b853235"
+  },
+  {
+    "path": "src/NetAdminStudio.Domain/Automation/AutomationRule.cs",
+    "bytes": 434,
+    "sha256": "11f6842b58ad6c9f1d152200a938da1d179dd5c0b0279ead116a36d375a7c75d"
+  },
+  {
+    "path": "src/NetAdminStudio.Domain/Common/Entity.cs",
+    "bytes": 126,
+    "sha256": "7bc3aeece7c8f5f53e6af4c3a74fd93ec80db109f578268da1c053805dbbf8c6"
+  },
+  {
+    "path": "src/NetAdminStudio.Domain/NetAdminStudio.Domain.csproj",
+    "bytes": 128,
+    "sha256": "e44c6aa5d69d0526c6b7961331a2020122c313ee9ea087d1daa3f4e7cab34bad"
+  },
+  {
+    "path": "src/NetAdminStudio.Domain/Printers/PrinterDevice.cs",
+    "bytes": 621,
+    "sha256": "2c47e4aefac3daba866b64e29e3605b0cca83b81fe7bab78938b75447960985b"
+  },
+  {
+    "path": "src/NetAdminStudio.Infrastructure/Demo/DemoDataSeeder.cs",
+    "bytes": 3044,
+    "sha256": "5d43a630753ecf17ca816156b87a78ed3e5d61d15dbd90c1c1ff00dec7f92f9d"
+  },
+  {
+    "path": "src/NetAdminStudio.Infrastructure/DependencyInjection.cs",
+    "bytes": 938,
+    "sha256": "4c8220fbc8f5ef9413b58b4e02199ca1a59811dac5259c686a2c1fc3d645e515"
+  },
+  {
+    "path": "src/NetAdminStudio.Infrastructure/NetAdminStudio.Infrastructure.csproj",
+    "bytes": 418,
+    "sha256": "5fcda4611fe99b505dee26e6cd6b80bd8380b503701c0b169ab5d9eababc7559"
+  },
+  {
+    "path": "src/NetAdminStudio.Infrastructure/Networking/SafeNetworkProbe.cs",
+    "bytes": 738,
+    "sha256": "c33b6ffb7c052b5d073e1cbb38d781b35f12c8b3980b7d62f6aa9576de43111c"
+  },
+  {
+    "path": "src/NetAdminStudio.Infrastructure/Persistence/Database.cs",
+    "bytes": 1528,
+    "sha256": "eb7764148bc31eb21cecd09f38b3afeeee986fea98a9fe559517ccd94b54ba45"
+  },
+  {
+    "path": "src/NetAdminStudio.Infrastructure/Persistence/Repositories.cs",
+    "bytes": 12498,
+    "sha256": "a4c3fc382e3ccb99a32e627e223da3ea8d984f90166e61ea0b87d2e2f591c23a"
+  },
+  {
+    "path": "tests/NetAdminStudio.Tests/NetAdminStudio.Tests.csproj",
+    "bytes": 561,
+    "sha256": "19784230e502caf338fa80b32191657d4a75491853113b05c339459c8caa20c7"
+  },
+  {
+    "path": "tests/NetAdminStudio.Tests/NetworkAssetTests.cs",
+    "bytes": 805,
+    "sha256": "14e76ea7c035d9a1a995a9d83011f23b5f55c662dac79d678eb8a18dd09a2b51"
+  }
+]
