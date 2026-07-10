@@ -27,6 +27,9 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
     private string scanStatusText = "Listo para escanear la red.";
 
     [ObservableProperty]
+    private string printerStatusText = "";
+
+    [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanScan))]
     private bool isScanning;
 
@@ -124,6 +127,22 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
         finally
         {
             IsScanning = false;
+        }
+    }
+
+    [RelayCommand]
+    private async Task ScanPrintersAsync()
+    {
+        try
+        {
+            PrinterStatusText = "Detectando impresoras…";
+            var count = await apiClient.ScanPrintersAsync(CancellationToken.None);
+            PrinterStatusText = $"{count} impresoras detectadas.";
+            await RefreshAsync();
+        }
+        catch (Exception ex)
+        {
+            PrinterStatusText = $"Error: {ex.Message}";
         }
     }
 }

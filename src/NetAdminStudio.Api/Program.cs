@@ -4,6 +4,7 @@ using NetAdminStudio.Application.Assistant;
 using NetAdminStudio.Application.Dashboard;
 using NetAdminStudio.Application.Monitoring;
 using NetAdminStudio.Application.Networking;
+using NetAdminStudio.Application.Printers;
 using NetAdminStudio.Domain.Automation;
 using NetAdminStudio.Infrastructure;
 using NetAdminStudio.Infrastructure.Demo;
@@ -56,6 +57,13 @@ app.MapGet("/api/v1/assets",
 app.MapGet("/api/v1/printers",
     async (IPrinterRepository repository, CancellationToken ct) =>
         Results.Ok(await repository.GetAllAsync(ct)));
+
+app.MapPost("/api/v1/printers/scan",
+    async (PrinterDiscoveryService service, CancellationToken ct) =>
+    {
+        var count = await service.DiscoverAsync(ct);
+        return Results.Ok(new { discovered = count });
+    });
 
 app.MapGet("/api/v1/alerts",
     async (IAlertRepository repository, CancellationToken ct) =>

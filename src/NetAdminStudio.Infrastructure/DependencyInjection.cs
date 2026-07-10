@@ -21,6 +21,7 @@ public static class DependencyInjection
         services.AddSingleton<INetworkScanner, TcpPortScanner>();
         services.AddSingleton<IArpTable, ArpTable>();
         services.AddSingleton<IVendorLookup, OuiVendorLookup>();
+        services.AddSingleton<IPrinterProbe, Printers.WmiPrinterProbe>();
         services.AddScoped<DemoDataSeeder>();
         return services;
     }

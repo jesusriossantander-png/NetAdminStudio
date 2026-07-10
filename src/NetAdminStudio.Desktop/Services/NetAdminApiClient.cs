@@ -80,6 +80,8 @@ public sealed record AssistantAnswerDto(
 
 public sealed record ScanStartedDto(Guid ScanId);
 
+public sealed record PrinterScanResultDto(int Discovered);
+
 public sealed record ScanStatusDto(
     Guid Id,
     string Cidr,
@@ -134,4 +136,14 @@ public sealed class NetAdminApiClient(HttpClient httpClient)
         await httpClient.GetFromJsonAsync<ScanStatusDto>(
             $"/api/v1/network/scan/{id}", ct)
             ?? throw new InvalidOperationException("La API devolvió un estado vacío.");
+
+    public async Task<int> ScanPrintersAsync(CancellationToken ct)
+    {
+        var response = await httpClient.PostAsync("/api/v1/printers/scan", null, ct);
+        response.EnsureSuccessStatusCode();
+
+        var dto = await response.Content.ReadFromJsonAsync<PrinterScanResultDto>(
+            cancellationToken: ct);
+        return dto?.Discovered ?? 0;
+    }
 }

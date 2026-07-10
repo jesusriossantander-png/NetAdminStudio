@@ -1,8 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <!-- La app es Windows-only (WMI, ARP); WmiPrinterProbe se protege con OperatingSystem.IsWindows(). -->
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="System.Management" Version="8.0.0" />
     <ProjectReference Include="..\NetAdminStudio.Application\NetAdminStudio.Application.csproj" />
     <ProjectReference Include="..\NetAdminStudio.Domain\NetAdminStudio.Domain.csproj" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.7" />
