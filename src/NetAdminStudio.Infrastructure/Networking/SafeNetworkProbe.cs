@@ -10,7 +10,8 @@ public sealed class SafeNetworkProbe : INetworkProbe
         try
         {
             using var ping = new Ping();
-            var reply = await ping.SendPingAsync(host, TimeSpan.FromSeconds(2), ct);
+            var reply = await ping.SendPingAsync(
+                host, TimeSpan.FromSeconds(2), cancellationToken: ct);
             return new(
                 reply.Status == IPStatus.Success,
                 reply.Status == IPStatus.Success ? reply.RoundtripTime : null,
