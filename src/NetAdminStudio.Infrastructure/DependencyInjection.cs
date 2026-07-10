@@ -18,6 +18,9 @@ public static class DependencyInjection
         services.AddScoped<IAlertRepository, AlertRepository>();
         services.AddScoped<IAutomationRepository, AutomationRepository>();
         services.AddSingleton<INetworkProbe, SafeNetworkProbe>();
+        services.AddSingleton<INetworkScanner, TcpPortScanner>();
+        services.AddSingleton<IArpTable, ArpTable>();
+        services.AddSingleton<IVendorLookup, OuiVendorLookup>();
         services.AddScoped<DemoDataSeeder>();
         return services;
     }
