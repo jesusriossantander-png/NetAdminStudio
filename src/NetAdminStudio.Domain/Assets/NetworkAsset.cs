@@ -26,11 +26,31 @@ public sealed class NetworkAsset : Entity
     public DateTimeOffset? LastSeenAt { get; private set; }
     public double? LatencyMs { get; private set; }
 
+    public string? Hostname { get; set; }
+    public IReadOnlyList<int> OpenPorts { get; set; } = Array.Empty<int>();
+    public DateTimeOffset? FirstSeenAt { get; private set; }
+    public string Origin { get; set; } = "demo";
+
     public void RecordPresence(bool reachable, double? latencyMs, DateTimeOffset observedAt)
     {
         State = reachable ? OperationalState.Online : OperationalState.Offline;
         LatencyMs = latencyMs;
         LastSeenAt = observedAt;
+    }
+
+    public void RecordDiscovery(
+        string? hostname, string? mac, string? vendor,
+        IReadOnlyList<int> openPorts, AssetType type,
+        double? latencyMs, DateTimeOffset observedAt)
+    {
+        Hostname = hostname;
+        if (!string.IsNullOrWhiteSpace(mac)) MacAddress = mac;
+        if (!string.IsNullOrWhiteSpace(vendor)) Vendor = vendor;
+        OpenPorts = openPorts;
+        if (type != AssetType.Unknown) Type = type;
+        Origin = "discovery";
+        FirstSeenAt ??= observedAt;
+        RecordPresence(true, latencyMs, observedAt);
     }
 
     public void MarkDegraded() => State = OperationalState.Degraded;

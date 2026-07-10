@@ -32,4 +32,22 @@ public sealed class NetworkAssetTests
 
         Assert.Equal(OperationalState.Offline, asset.State);
     }
+
+    [Fact]
+    public void RecordDiscovery_SetsDiscoveryFieldsAndOnline()
+    {
+        var asset = new NetworkAsset { Name = "PC-01", Type = AssetType.Unknown };
+        var now = DateTimeOffset.UtcNow;
+
+        asset.RecordDiscovery("PC-01.local", "AA-BB-CC-11-22-33", "Dell",
+            new[] { 445, 3389 }, AssetType.Workstation, 3.0, now);
+
+        Assert.Equal(OperationalState.Online, asset.State);
+        Assert.Equal("PC-01.local", asset.Hostname);
+        Assert.Equal("Dell", asset.Vendor);
+        Assert.Equal(AssetType.Workstation, asset.Type);
+        Assert.Equal(new[] { 445, 3389 }, asset.OpenPorts);
+        Assert.Equal("discovery", asset.Origin);
+        Assert.Equal(now, asset.FirstSeenAt);
+    }
 }
