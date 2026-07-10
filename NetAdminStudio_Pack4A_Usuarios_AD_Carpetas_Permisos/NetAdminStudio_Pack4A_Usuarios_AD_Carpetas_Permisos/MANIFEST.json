@@ -1,0 +1,172 @@
+[
+  {
+    "path": "02_ARQUITECTURA/ACTIVE_DIRECTORY.md",
+    "bytes": 1041,
+    "sha256": "b6470ef89930c2f691fdec803c7d56cefe6da767325749db4b8e14d49433b117"
+  },
+  {
+    "path": "02_ARQUITECTURA/EFFECTIVE_ACCESS.md",
+    "bytes": 719,
+    "sha256": "40dc213c8be0e86663e2ffdb8271a2d555c60819ad6e726e6504770d1af8405f"
+  },
+  {
+    "path": "02_ARQUITECTURA/IDENTITY_OVERVIEW.md",
+    "bytes": 959,
+    "sha256": "026f33ecfb02d0cb226677ffd3b817f153f3f1c4cfd16ac0a06dfe32e871d93f"
+  },
+  {
+    "path": "02_ARQUITECTURA/LOCAL_USERS_GROUPS.md",
+    "bytes": 586,
+    "sha256": "32f5438ff5dc93d05a588a28a435d1d0a657168b1b90ac2f50f57f656e1120be"
+  },
+  {
+    "path": "02_ARQUITECTURA/NTFS_PERMISSIONS.md",
+    "bytes": 627,
+    "sha256": "a2d1b05d1f0c1b8c5f2211027a37ff36e28e8eb6c20a74dfb595a47a487f8ebe"
+  },
+  {
+    "path": "02_ARQUITECTURA/PERMISSION_REMEDIATION.md",
+    "bytes": 641,
+    "sha256": "441ce4912df85cf49a4ff64df080ef2cd1ed8db0ce90f968543875db862e99f1"
+  },
+  {
+    "path": "02_ARQUITECTURA/SHARES_AND_SESSIONS.md",
+    "bytes": 623,
+    "sha256": "daf0f3b103e02e9b33b21acd19e18b1722986e54a4254020d875230fda5ae4b8"
+  },
+  {
+    "path": "02_ARQUITECTURA/SMB_PERMISSIONS.md",
+    "bytes": 443,
+    "sha256": "f7b0cc704fa47530b7f87d083f39ddef2c91d830da9627125dc60f4c9fc16983"
+  },
+  {
+    "path": "03_DATABASE/MIGRATION_4A.sql",
+    "bytes": 3931,
+    "sha256": "8540a99e3fcc48f5a955ccdbe8964674aa3156d7167604c58c5abecbe8eb1942"
+  },
+  {
+    "path": "03_DATABASE/SCHEMA_NOTES.md",
+    "bytes": 413,
+    "sha256": "ae81fd7bd76f3038434dc147e792993105efd23e9ed6641fa2443e0d916caba3"
+  },
+  {
+    "path": "04_UI/CHANGE_PREVIEW.md",
+    "bytes": 466,
+    "sha256": "e3b87c94f398d3bc884731fedf51447d807510e761f662bfc85638657b4ad06c"
+  },
+  {
+    "path": "04_UI/GROUP_DETAIL.md",
+    "bytes": 241,
+    "sha256": "434e6a29a20bab726b0f78d878baa7b7978a31a87ce08a16882c460f51b81f8b"
+  },
+  {
+    "path": "04_UI/PERMISSION_EXPLORER.md",
+    "bytes": 462,
+    "sha256": "722314a0f39f284840e80310725a30b00655460e59dbd9c9c0f825f4e6a5304e"
+  },
+  {
+    "path": "04_UI/SHARES_DASHBOARD.md",
+    "bytes": 314,
+    "sha256": "7a8fd131a3749de9c6724586b5c87e32e9e94c64277ab4a0a5d3004119e87fac"
+  },
+  {
+    "path": "04_UI/USERS_DASHBOARD.md",
+    "bytes": 423,
+    "sha256": "1817e227a2af7b9a7436af6dbb6f8214f75ccbe21a277735687db10d199df812"
+  },
+  {
+    "path": "07_TESTING/ACCEPTANCE_CHECKLIST.md",
+    "bytes": 613,
+    "sha256": "c8ba9fd3fbd885a98b3edef21d5661159262ae65cc8c28e3d0f708c2f8bba6bf"
+  },
+  {
+    "path": "07_TESTING/TEST_PLAN.md",
+    "bytes": 835,
+    "sha256": "be915be4fb72df09e4632c378cba1a44eaa1046f765a0bec0f2926dcd108c670"
+  },
+  {
+    "path": "08_PROMPTS/050_IMPLEMENTAR_PACK_4A.md",
+    "bytes": 886,
+    "sha256": "117d8c6f12dd2f9951a597328dc41a237a95bed16645c12cea19e14aefe2a825"
+  },
+  {
+    "path": "08_PROMPTS/051_REVISAR_PACK_4A.md",
+    "bytes": 655,
+    "sha256": "2061fed2e29bbfed99c8686bed57d134802733f87048cf74903bf62360cf9276"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0029_SID_COMO_IDENTIDAD.md",
+    "bytes": 236,
+    "sha256": "43229acec1ee0293f2349dcd515ba087407be22224c625837428218e6775c3a3"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0030_SNAPSHOTS_INMUTABLES_ACL.md",
+    "bytes": 196,
+    "sha256": "fbba1f6e5142d72dcf5760eb7544d24e65994657ab5dfcc91df1c3dde570a926"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0031_CAMBIOS_MEDIANTE_PLAN.md",
+    "bytes": 214,
+    "sha256": "e71985e1a33582ab3a7802144a20c622b5b8700082fc447417c1ac5acc4bfbcd"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0032_SEPARAR_NTFS_Y_SMB.md",
+    "bytes": 166,
+    "sha256": "1db1a4a7b3c79b06dce5530e70501e30ad3a591402ccdf5bbbbb5eb1f74cd6d6"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0033_LECTURA_AD_POR_DEFECTO.md",
+    "bytes": 194,
+    "sha256": "02e7f819ff9a55efe430b2bc8f55bd80c83505d76a8e53b324c494ebb7b6b575"
+  },
+  {
+    "path": "10_MOCKUPS/CHANGE_PLAN_ASCII.md",
+    "bytes": 2099,
+    "sha256": "1a992be5a67452f0316f46c68a53e6afeb3e0c0d1c647b37acb7a13c066fc841"
+  },
+  {
+    "path": "10_MOCKUPS/PERMISSIONS_ASCII.md",
+    "bytes": 1973,
+    "sha256": "302f5b2b0bf97775b93b6048ef9127efdd2dc8f2b0fbb473dd5ee7c3ba11a601"
+  },
+  {
+    "path": "10_MOCKUPS/USERS_ASCII.md",
+    "bytes": 1594,
+    "sha256": "b8a5193069d37eb5430a253e2074f06d32da0a68d2f813cf4d50aa672ef0d50a"
+  },
+  {
+    "path": "12_CONTRACTS/EVENTS.md",
+    "bytes": 330,
+    "sha256": "ab4695ff3203165063f8e60570cb59156205d32f25255fe48a14d0d883f302d9"
+  },
+  {
+    "path": "12_CONTRACTS/IDENTITY_API.md",
+    "bytes": 243,
+    "sha256": "eb905633e10bdea72341af372583e52c62ca63874d1a0193bd798d3413430984"
+  },
+  {
+    "path": "12_CONTRACTS/SHARES_PERMISSIONS_API.md",
+    "bytes": 426,
+    "sha256": "7156e36cd90005e3fb2944e9e972536aa9a84e17862a8ca0898c11698dbc8e28"
+  },
+  {
+    "path": "13_SECURITY/SECURITY_MODEL.md",
+    "bytes": 677,
+    "sha256": "55a0205195b478abe139ea685fb1dab30ced16c6fcf9e8881b36b9a2a2e67f0b"
+  },
+  {
+    "path": "14_OPERATIONS/OPERATION_GUIDE.md",
+    "bytes": 583,
+    "sha256": "7891a135fb965a94a97bfa6eb446de8bffd4983ea75dd9dbbd6912fe918bf407"
+  },
+  {
+    "path": "CHANGELOG.md",
+    "bytes": 261,
+    "sha256": "5eb1108a251dcc7da77a6c40ee40c39344aa77b8bc26e257da53049fb0dbe44e"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1752,
+    "sha256": "f82e74fe3e81ebdb7bf704e02a43d841196bac10c1018a489c92c3411faad7b0"
+  }
+]
