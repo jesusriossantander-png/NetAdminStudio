@@ -11,6 +11,11 @@ using NetAdminStudio.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Puerto fijo para que desarrollo y el .exe publicado coincidan (la app de escritorio
+// apunta a este mismo puerto). Se puede sobreescribir con la variable ASPNETCORE_URLS.
+builder.WebHost.UseUrls(
+    builder.Configuration["ASPNETCORE_URLS"] ?? "http://localhost:5188");
+
 var dataDirectory = Path.Combine(AppContext.BaseDirectory, "data");
 Directory.CreateDirectory(dataDirectory);
 var connectionString = $"Data Source={Path.Combine(dataDirectory, "netadminstudio.db")}";
