@@ -1,0 +1,14 @@
+{
+  "id": "bbdc8819-1c8e-4f9d-86c9-60d61c7a8097",
+  "assetCode": "NET-SW-001",
+  "displayName": "Switch Oficina SG3428",
+  "assetType": "Switch",
+  "vendor": "TP-Link",
+  "model": "TL-SG3428",
+  "primaryIpAddress": "192.168.0.10",
+  "primaryMacAddress": "00:11:22:33:44:55",
+  "operationalState": "Online",
+  "source": "SNMP",
+  "confidence": "Verified",
+  "lastSeenAt": "2026-07-10T12:00:00Z"
+}

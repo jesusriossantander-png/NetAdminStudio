@@ -1,0 +1,207 @@
+[
+  {
+    "path": "03_DATABASE/MIGRATION_3A.sql",
+    "bytes": 5676,
+    "sha256": "fc1b61d8c6e3fdd9cff848d008d085c32b2c0fc469bb6205c07f9909f84c9cbc"
+  },
+  {
+    "path": "03_DATABASE/NETWORK_PRINTER_SCHEMA.md",
+    "bytes": 770,
+    "sha256": "dd3546bfdfc64fa34e04753ad85bbce5efb5ffb56c7853a1b4fd1bd76a3b26af"
+  },
+  {
+    "path": "04_UI/NETWORK_ASSET_DETAIL.md",
+    "bytes": 571,
+    "sha256": "6322416332d027633fcedce134eb291b0ad97b9570ace49ba176b4894c2eb09e"
+  },
+  {
+    "path": "04_UI/NETWORK_DASHBOARD.md",
+    "bytes": 701,
+    "sha256": "171004cbd3f6c863b6ee473d38a8dae1f6503d32253efe8c347511f15b118645"
+  },
+  {
+    "path": "04_UI/PRINTERS_DASHBOARD.md",
+    "bytes": 420,
+    "sha256": "0e84eb18710888eb29254162c4c802aa34182b287a91a64b627c1561a5ff280a"
+  },
+  {
+    "path": "04_UI/PRINTER_DETAIL.md",
+    "bytes": 524,
+    "sha256": "4c4a753de17f32c8a26358133e64da71777d7015e38edf9c76bdb1fb8c48bf3c"
+  },
+  {
+    "path": "07_TESTING/PACK3A_ACCEPTANCE_CHECKLIST.md",
+    "bytes": 1132,
+    "sha256": "3eff92a290761f0ccb7a1bf8d327322c52b78ca96c2b88b355daf0410988fe52"
+  },
+  {
+    "path": "07_TESTING/PACK3A_TEST_PLAN.md",
+    "bytes": 811,
+    "sha256": "fcdeecedcdc6aca5fc1e383fc0b266614fbba62e046bd461781b09f0c1416249"
+  },
+  {
+    "path": "08_PROMPTS/040_IMPLEMENTAR_PACK_3A.md",
+    "bytes": 1171,
+    "sha256": "ebef6059b558ac4c40ebb8ed3ff988908152c5d61ee69ef06c5a97b00f9adc90"
+  },
+  {
+    "path": "08_PROMPTS/041_REVISAR_PACK_3A.md",
+    "bytes": 714,
+    "sha256": "58a35370209dd386fb00d20ef40430ef29fc78703ea006962783802a77465c22"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0018_OBSERVAR_ANTES_DE_ADMINISTRAR.md",
+    "bytes": 505,
+    "sha256": "48b3ec0e7edfbcdb1e90ae526d73edc0feb8ae40a4c7da20609c737734e341cb"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0019_TOPOLOGIA_CON_EVIDENCIA.md",
+    "bytes": 321,
+    "sha256": "7f577f5664a9c9c345625a3f90a6e73b3e3c86b41b4059692e3da55d7e13fe65"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0020_METRICAS_TIME_SERIES_EN_SQLITE_MVP.md",
+    "bytes": 335,
+    "sha256": "5ae7c6468ba5a4996648259aca7b4de1641e61536dc22dd1f1300378675de4c0"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0021_PRIVACIDAD_TRABAJOS_IMPRESION.md",
+    "bytes": 325,
+    "sha256": "9fc70a37998e6b24ad0cf5765e33cb4b16d9479bcad7aa82c20c0cb32b62f866"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0022_ADAPTADORES_DE_IMPRESION.md",
+    "bytes": 245,
+    "sha256": "11862b83807347c260c4c8ee50b828a98deeba27e548ee8edf382dedc3d47312"
+  },
+  {
+    "path": "09_DECISIONES/ADR-0023_ESCANEO_SEGURO_Y_LIMITADO.md",
+    "bytes": 311,
+    "sha256": "6cd43db940a53c160db74292d5f2a9f7690d7cf9e4010b257c96bbea1f88fa3c"
+  },
+  {
+    "path": "10_MOCKUPS/MODULO_IMPRESORAS_ASCII.md",
+    "bytes": 2206,
+    "sha256": "1d2a0929c35d549ad33e75ff8e0ee00bbc7901c24de6563c05ce57cca987ecf3"
+  },
+  {
+    "path": "10_MOCKUPS/MODULO_RED_ASCII.md",
+    "bytes": 2370,
+    "sha256": "1ebc1257685bbe8076654932c1ebf598888bb1b5e049a6dcf62d4ab52a4ffcfd"
+  },
+  {
+    "path": "11_MODULES/INTEGRATION/BOUNDARIES.md",
+    "bytes": 446,
+    "sha256": "71d6a281d60668f228b5870f55d62fb421522ee7edd518731dc27e7872ca4903"
+  },
+  {
+    "path": "11_MODULES/PRINTERS/CONSUMABLES_COUNTERS.md",
+    "bytes": 668,
+    "sha256": "e9bf8556b13a98321b6229bef6d1acaf47853fb2e3d058f9e60257443b0dd433"
+  },
+  {
+    "path": "11_MODULES/PRINTERS/MAINTENANCE.md",
+    "bytes": 604,
+    "sha256": "d17a9e4e978e7cfd96d62ce378a71bd23e8cc0cd6e5239ce8aba23b3f4eaed48"
+  },
+  {
+    "path": "11_MODULES/PRINTERS/PRINTERS_OVERVIEW.md",
+    "bytes": 613,
+    "sha256": "97d5a8686b0de6dd54a9b0122e75b7cc010727979fb44ba3db4358800efe695b"
+  },
+  {
+    "path": "11_MODULES/PRINTERS/PRINTER_MODEL.md",
+    "bytes": 618,
+    "sha256": "58887741a96cd13bdad4acc9b175ca2f891b892227251e83d4277f2ffbc4533d"
+  },
+  {
+    "path": "11_MODULES/PRINTERS/QUEUES_JOBS.md",
+    "bytes": 634,
+    "sha256": "008ecdd2f165b3bc6109c8c7085f4b678c3eb7da0064de7ba2f374fa2702c1b2"
+  },
+  {
+    "path": "11_MODULES/PRINTERS/RASPBERRY_CUPS.md",
+    "bytes": 794,
+    "sha256": "d7de876bd66e76c95ce5b66a57864400b7e7aa8e4491962806b2c35b0d3a7e95"
+  },
+  {
+    "path": "11_MODULES/RED/ASSET_MODEL.md",
+    "bytes": 934,
+    "sha256": "483874e40d215fc74767c93d2c01d9add370fd87dfcf6c6e1683da6be78d8465"
+  },
+  {
+    "path": "11_MODULES/RED/DIAGNOSTICS.md",
+    "bytes": 764,
+    "sha256": "7eb8896d9c657ac76e49570914710813e4042ab28b5c2501f8576461cfe337aa"
+  },
+  {
+    "path": "11_MODULES/RED/DISCOVERY_AND_SCAN.md",
+    "bytes": 1058,
+    "sha256": "83d17383be491aedf731371835a5ddb15c897ad4a58b995e0f1784b934d64d74"
+  },
+  {
+    "path": "11_MODULES/RED/METRICS_ALERTS.md",
+    "bytes": 942,
+    "sha256": "13f9298bd12b9907d2006bb7d4cb5b250d174060e6ad6da18d76f4451ef813af"
+  },
+  {
+    "path": "11_MODULES/RED/PORTS_VLANS.md",
+    "bytes": 802,
+    "sha256": "3de8ae117e5e78f7696452df6c83b5b618a63998f29b2f66a0a917eb94e0b29f"
+  },
+  {
+    "path": "11_MODULES/RED/RED_OVERVIEW.md",
+    "bytes": 1069,
+    "sha256": "570613f71a6ac603bb59551cdff39c05836db439fda3310f87b68f2a7f7f5363"
+  },
+  {
+    "path": "11_MODULES/RED/TOPOLOGY.md",
+    "bytes": 769,
+    "sha256": "1ef574b46f6d9bcc712c4c073cd4ec708211f454c091e281e25e023898be99d4"
+  },
+  {
+    "path": "12_CONTRACTS/EVENTS.md",
+    "bytes": 694,
+    "sha256": "6032d3fac295e2499188dae4118373255a6e6eea2f1281939ea91cb3806cdbf5"
+  },
+  {
+    "path": "12_CONTRACTS/EXAMPLES/network-asset.example.json",
+    "bytes": 396,
+    "sha256": "8b2566d6abf240f496361d83493d0231227b4ea704685fc0b5d2902ee06fb9bc"
+  },
+  {
+    "path": "12_CONTRACTS/EXAMPLES/printer.example.json",
+    "bytes": 480,
+    "sha256": "2ae20eda36b686bda017f56f4c2004bdd498d085a3a8fde71998d12a69d50bf1"
+  },
+  {
+    "path": "12_CONTRACTS/NETWORK_API.md",
+    "bytes": 782,
+    "sha256": "01462cbabfbbe6796b6e07dda1989825698dd14b2df6a5b3b87519acdaa4d562"
+  },
+  {
+    "path": "12_CONTRACTS/PRINTER_API.md",
+    "bytes": 557,
+    "sha256": "126c6c65d6ebdb18e5f468612582041761f730ad6790db950ffcbfe7c86c87f9"
+  },
+  {
+    "path": "13_SECURITY/NETWORK_PRINTER_SECURITY.md",
+    "bytes": 996,
+    "sha256": "d5dc26aaf02e02e5be4eb30f73418a12826bd333fa2749dacf198357291e1152"
+  },
+  {
+    "path": "14_OPERATIONS/DEPLOYMENT_AND_SUPPORT.md",
+    "bytes": 703,
+    "sha256": "a6adb57950a5b73e3080b71bde08af1e401f6d89f87951cfc6f633d1ee7129ad"
+  },
+  {
+    "path": "CHANGELOG.md",
+    "bytes": 267,
+    "sha256": "7c00cc54c1d36e7e07caeb64d1d1a6c844489939760a9b0cf8142614b6d54fda"
+  },
+  {
+    "path": "README.md",
+    "bytes": 2319,
+    "sha256": "db79ca3ab57fbe0bfc851e1234d7d7ce8588f2576d497b6bde6f34d86ebb76bf"
+  }
+]

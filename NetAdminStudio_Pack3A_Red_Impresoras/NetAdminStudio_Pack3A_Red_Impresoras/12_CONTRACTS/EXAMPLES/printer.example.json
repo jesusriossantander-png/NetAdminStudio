@@ -1,0 +1,17 @@
+{
+  "id": "517602f3-c3d3-4bf6-b748-eef68535b2e2",
+  "assetId": "f4ee8de9-0c51-4d8e-adcc-d368b62688ac",
+  "displayName": "Epson Oficina",
+  "vendor": "Epson",
+  "model": "L3250",
+  "connectionType": "RaspberryPiCups",
+  "operationalState": "Ready",
+  "endpoint": {
+    "protocol": "IPP",
+    "address": "192.168.0.50",
+    "port": 631,
+    "queueName": "epson_oficina",
+    "deviceUri": "ipp://192.168.0.50:631/printers/epson_oficina"
+  },
+  "lastSeenAt": "2026-07-10T12:00:00Z"
+}

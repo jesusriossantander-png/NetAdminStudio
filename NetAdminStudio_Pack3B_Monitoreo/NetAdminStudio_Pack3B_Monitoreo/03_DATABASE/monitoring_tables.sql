@@ -1,0 +1,1 @@
+-- tablas monitoring_sessions, monitoring_metrics, monitoring_events, alert_rules, alert_instances
