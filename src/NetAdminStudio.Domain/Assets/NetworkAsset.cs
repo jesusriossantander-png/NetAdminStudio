@@ -28,7 +28,7 @@ public sealed class NetworkAsset : Entity
 
     public string? Hostname { get; set; }
     public IReadOnlyList<int> OpenPorts { get; set; } = Array.Empty<int>();
-    public DateTimeOffset? FirstSeenAt { get; private set; }
+    public DateTimeOffset? FirstSeenAt { get; set; }
     public string Origin { get; set; } = "demo";
 
     public void RecordPresence(bool reachable, double? latencyMs, DateTimeOffset observedAt)

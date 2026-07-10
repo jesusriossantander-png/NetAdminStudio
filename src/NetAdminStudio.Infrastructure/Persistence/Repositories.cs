@@ -40,7 +40,14 @@ public sealed class AssetRepository(Database database) : IAssetRepository
                 MacAddress = reader.NullableString("mac_address"),
                 Vendor = reader.NullableString("vendor"),
                 Model = reader.NullableString("model"),
-                Location = reader.NullableString("location")
+                Location = reader.NullableString("location"),
+                Hostname = reader.NullableString("hostname"),
+                Origin = reader.NullableString("origin") ?? "demo",
+                OpenPorts = ParsePorts(reader.NullableString("open_ports")),
+                FirstSeenAt = DateTimeOffset.TryParse(
+                    reader.NullableString("first_seen_at"), out var firstSeen)
+                    ? firstSeen
+                    : null
             };
 
             var state = (OperationalState)reader.GetInt32(reader.GetOrdinal("state"));
@@ -74,8 +81,8 @@ public sealed class AssetRepository(Database database) : IAssetRepository
         using var db = database.Open();
         using var cmd = db.CreateCommand();
         cmd.CommandText = @"
-INSERT INTO assets(id,name,type,state,ip_address,mac_address,vendor,model,location,last_seen_at,latency_ms)
-VALUES($id,$name,$type,$state,$ip,$mac,$vendor,$model,$location,$seen,$latency)
+INSERT INTO assets(id,name,type,state,ip_address,mac_address,vendor,model,location,last_seen_at,latency_ms,hostname,open_ports,first_seen_at,origin)
+VALUES($id,$name,$type,$state,$ip,$mac,$vendor,$model,$location,$seen,$latency,$hostname,$ports,$firstSeen,$origin)
 ON CONFLICT(id) DO UPDATE SET
  name=excluded.name,
  type=excluded.type,
@@ -86,7 +93,11 @@ ON CONFLICT(id) DO UPDATE SET
  model=excluded.model,
  location=excluded.location,
  last_seen_at=excluded.last_seen_at,
- latency_ms=excluded.latency_ms;";
+ latency_ms=excluded.latency_ms,
+ hostname=excluded.hostname,
+ open_ports=excluded.open_ports,
+ origin=excluded.origin;";
+        // Nota: first_seen_at NO se pisa en UPDATE (se conserva la primera detección).
 
         cmd.Parameters.AddWithValue("$id", asset.Id.ToString());
         cmd.Parameters.AddWithValue("$name", asset.Name);
@@ -99,8 +110,20 @@ ON CONFLICT(id) DO UPDATE SET
         cmd.Parameters.AddWithValue("$location", (object?)asset.Location ?? DBNull.Value);
         cmd.Parameters.AddWithValue("$seen", asset.LastSeenAt?.ToString("O") ?? (object)DBNull.Value);
         cmd.Parameters.AddWithValue("$latency", asset.LatencyMs ?? (object)DBNull.Value);
+        cmd.Parameters.AddWithValue("$hostname", (object?)asset.Hostname ?? DBNull.Value);
+        cmd.Parameters.AddWithValue("$ports",
+            asset.OpenPorts.Count == 0 ? (object)DBNull.Value : string.Join(",", asset.OpenPorts));
+        cmd.Parameters.AddWithValue("$firstSeen",
+            asset.FirstSeenAt?.ToString("O") ?? (object)DBNull.Value);
+        cmd.Parameters.AddWithValue("$origin", asset.Origin);
         await cmd.ExecuteNonQueryAsync(ct);
     }
+
+    private static IReadOnlyList<int> ParsePorts(string? csv) =>
+        string.IsNullOrWhiteSpace(csv)
+            ? Array.Empty<int>()
+            : csv.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                 .Select(int.Parse).ToArray();
 }
 
 public sealed class PrinterRepository(Database database) : IPrinterRepository

@@ -29,7 +29,11 @@ CREATE TABLE IF NOT EXISTS assets(
  model TEXT,
  location TEXT,
  last_seen_at TEXT,
- latency_ms REAL
+ latency_ms REAL,
+ hostname TEXT,
+ open_ports TEXT,
+ first_seen_at TEXT,
+ origin TEXT NOT NULL DEFAULT 'demo'
 );
 
 CREATE TABLE IF NOT EXISTS printers(
@@ -67,5 +71,26 @@ CREATE TABLE IF NOT EXISTS automation_rules(
  enabled INTEGER NOT NULL
 );";
         command.ExecuteNonQuery();
+
+        // Migración idempotente: agrega columnas de descubrimiento a bases ya existentes.
+        foreach (var alterSql in new[]
+        {
+            "ALTER TABLE assets ADD COLUMN hostname TEXT",
+            "ALTER TABLE assets ADD COLUMN open_ports TEXT",
+            "ALTER TABLE assets ADD COLUMN first_seen_at TEXT",
+            "ALTER TABLE assets ADD COLUMN origin TEXT NOT NULL DEFAULT 'demo'"
+        })
+        {
+            try
+            {
+                using var alter = db.CreateCommand();
+                alter.CommandText = alterSql;
+                alter.ExecuteNonQuery();
+            }
+            catch (SqliteException)
+            {
+                // La columna ya existe; ignorar.
+            }
+        }
     }
 }
