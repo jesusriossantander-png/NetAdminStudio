@@ -20,6 +20,18 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
     private string assistantAnswer =
         "Preguntá por activos offline, impresoras o alertas.";
 
+    [ObservableProperty]
+    private string scanCidr = "192.168.0.0/24";
+
+    [ObservableProperty]
+    private string scanStatusText = "Listo para escanear la red.";
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanScan))]
+    private bool isScanning;
+
+    public bool CanScan => !IsScanning;
+
     public ObservableCollection<AssetDto> Assets { get; } = [];
     public ObservableCollection<PrinterDto> Printers { get; } = [];
     public ObservableCollection<AlertDto> Alerts { get; } = [];
@@ -71,6 +83,47 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
         catch (Exception ex)
         {
             AssistantAnswer = $"Error: {ex.Message}";
+        }
+    }
+
+    [RelayCommand]
+    private async Task ScanAsync()
+    {
+        if (IsScanning || string.IsNullOrWhiteSpace(ScanCidr))
+            return;
+
+        try
+        {
+            IsScanning = true;
+            ScanStatusText = $"Iniciando escaneo de {ScanCidr}…";
+            var id = await apiClient.StartScanAsync(ScanCidr, CancellationToken.None);
+
+            while (true)
+            {
+                await Task.Delay(1000);
+                var st = await apiClient.GetScanStatusAsync(id, CancellationToken.None);
+                ScanStatusText =
+                    $"Escaneando {st.Cidr}: {st.Completed}/{st.Total} " +
+                    $"({st.Found} encontrados)";
+
+                if (st.Finished)
+                {
+                    ScanStatusText = st.Error is null
+                        ? $"Escaneo completo: {st.Found} dispositivos encontrados."
+                        : $"Error en el escaneo: {st.Error}";
+                    break;
+                }
+            }
+
+            await RefreshAsync();   // recarga la grilla con lo descubierto
+        }
+        catch (Exception ex)
+        {
+            ScanStatusText = $"No se pudo escanear: {ex.Message}";
+        }
+        finally
+        {
+            IsScanning = false;
         }
     }
 }

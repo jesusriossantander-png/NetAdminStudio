@@ -49,6 +49,33 @@
                             Command="{Binding RefreshCommand}"/>
                 </DockPanel>
 
+                <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Escaneo de red"
+                                   FontSize="18"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,10"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Rango (CIDR):"
+                                       VerticalAlignment="Center"
+                                       Margin="0,0,8,0"/>
+                            <TextBox Width="180"
+                                     Padding="6"
+                                     VerticalContentAlignment="Center"
+                                     Text="{Binding ScanCidr, UpdateSourceTrigger=PropertyChanged}"
+                                     IsEnabled="{Binding CanScan}"/>
+                            <Button Content="Escanear red"
+                                    Margin="10,0,0,0"
+                                    Command="{Binding ScanCommand}"
+                                    IsEnabled="{Binding CanScan}"/>
+                            <TextBlock Text="{Binding ScanStatusText}"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource MutedBrush}"
+                                       Margin="16,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
                 <UniformGrid Columns="6" Margin="0,18,0,12">
                     <Border Style="{StaticResource Card}">
                         <StackPanel>
@@ -104,13 +131,16 @@
                                 <DataGrid ItemsSource="{Binding Assets}"
                                           AutoGenerateColumns="False"
                                           IsReadOnly="True"
-                                          Height="260">
+                                          Height="300">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="*"/>
-                                        <DataGridTextColumn Header="IP" Binding="{Binding IpAddress}" Width="130"/>
-                                        <DataGridTextColumn Header="Ubicación" Binding="{Binding Location}" Width="130"/>
-                                        <DataGridTextColumn Header="Estado" Binding="{Binding State}" Width="80"/>
-                                        <DataGridTextColumn Header="Latencia" Binding="{Binding LatencyMs}" Width="90"/>
+                                        <DataGridTextColumn Header="IP" Binding="{Binding IpAddress}" Width="120"/>
+                                        <DataGridTextColumn Header="Nombre/Host" Binding="{Binding Name}" Width="*"/>
+                                        <DataGridTextColumn Header="MAC" Binding="{Binding MacAddress}" Width="140"/>
+                                        <DataGridTextColumn Header="Fabricante" Binding="{Binding Vendor}" Width="110"/>
+                                        <DataGridTextColumn Header="Tipo" Binding="{Binding TypeText}" Width="100"/>
+                                        <DataGridTextColumn Header="Puertos" Binding="{Binding PortsText}" Width="130"/>
+                                        <DataGridTextColumn Header="Estado" Binding="{Binding StateText}" Width="90"/>
+                                        <DataGridTextColumn Header="Latencia" Binding="{Binding LatencyMs}" Width="80"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
