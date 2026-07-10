@@ -3,6 +3,7 @@ using NetAdminStudio.Application.Abstractions;
 using NetAdminStudio.Application.Assistant;
 using NetAdminStudio.Application.Dashboard;
 using NetAdminStudio.Application.Monitoring;
+using NetAdminStudio.Application.Networking;
 using NetAdminStudio.Domain.Automation;
 using NetAdminStudio.Infrastructure;
 using NetAdminStudio.Infrastructure.Demo;
@@ -89,6 +90,30 @@ app.MapPost("/api/v1/assistant/ask",
     async (AssistantRequest request, OperationsAssistant assistant, CancellationToken ct) =>
         Results.Ok(await assistant.AskAsync(request.Question, ct)));
 
+app.MapPost("/api/v1/network/scan",
+    (NetworkScanRequest request, ScanJobManager jobs, NetworkDiscoveryEngine engine) =>
+    {
+        try
+        {
+            // Valida el CIDR temprano (lanza si es inválido o demasiado grande).
+            _ = Cidr.Hosts(request.Cidr);
+            var id = jobs.Start(request.Cidr, engine);
+            return Results.Accepted($"/api/v1/network/scan/{id}", new { scanId = id });
+        }
+        catch (ArgumentException ex)
+        {
+            return Results.BadRequest(new { error = ex.Message });
+        }
+    });
+
+app.MapGet("/api/v1/network/scan/{id:guid}",
+    (Guid id, ScanJobManager jobs) =>
+    {
+        var status = jobs.Get(id);
+        return status is null ? Results.NotFound() : Results.Ok(status);
+    });
+
 app.Run();
 
 public sealed record AssistantRequest(string Question);
+public sealed record NetworkScanRequest(string Cidr);
