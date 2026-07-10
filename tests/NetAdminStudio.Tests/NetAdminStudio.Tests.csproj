@@ -14,4 +14,8 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NetAdminStudio.Application\NetAdminStudio.Application.csproj" />
+    <ProjectReference Include="..\..\src\NetAdminStudio.Infrastructure\NetAdminStudio.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>
