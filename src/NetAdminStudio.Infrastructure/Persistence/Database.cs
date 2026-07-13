@@ -76,6 +76,12 @@ CREATE TABLE IF NOT EXISTS audit_log(
  at TEXT NOT NULL,
  action TEXT NOT NULL,
  detail TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS credentials(
+ host TEXT PRIMARY KEY,
+ username TEXT NOT NULL,
+ password_protected TEXT NOT NULL
 );";
         command.ExecuteNonQuery();
 

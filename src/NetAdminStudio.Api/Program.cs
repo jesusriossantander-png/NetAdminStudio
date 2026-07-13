@@ -74,11 +74,26 @@ app.MapGet("/api/v1/system/local",
 
 app.MapPost("/api/v1/system/remote",
     async (RemoteSystemRequest request, IRemoteSystemInfoProbe probe,
-     IAuditLog audit, CancellationToken ct) =>
+     ICredentialStore credentials, IAuditLog audit, CancellationToken ct) =>
     {
+        var user = request.Username;
+        var password = request.Password;
+
+        // Si no vienen credenciales, usar las guardadas (por host o la de por defecto).
+        if (string.IsNullOrWhiteSpace(password))
+        {
+            var saved = await credentials.GetAsync(request.Host, ct);
+            if (saved is null)
+                return Results.Problem(
+                    title: "Faltan credenciales",
+                    detail: "No hay credenciales guardadas para este equipo. Guardá un usuario y contraseña de administrador.",
+                    statusCode: 400);
+            (user, password) = saved.Value;
+        }
+
         try
         {
-            var info = await probe.GetAsync(request.Host, request.Username, request.Password, ct);
+            var info = await probe.GetAsync(request.Host, user, password, ct);
             await audit.LogAsync("Consulta remota WMI", $"Equipo {request.Host}", ct);
             return Results.Ok(info);
         }
@@ -89,6 +104,26 @@ app.MapPost("/api/v1/system/remote",
                 detail: ex.Message,
                 statusCode: 502);
         }
+    });
+
+app.MapGet("/api/v1/credentials",
+    async (ICredentialStore store, CancellationToken ct) =>
+        Results.Ok(await store.ListAsync(ct)));
+
+app.MapPost("/api/v1/credentials",
+    async (CredentialRequest request, ICredentialStore store, IAuditLog audit, CancellationToken ct) =>
+    {
+        await store.SaveAsync(request.Host ?? "", request.Username, request.Password, ct);
+        await audit.LogAsync("Credencial guardada",
+            $"Equipo {(string.IsNullOrWhiteSpace(request.Host) ? "(por defecto)" : request.Host)}, usuario {request.Username}", ct);
+        return Results.NoContent();
+    });
+
+app.MapDelete("/api/v1/credentials/{host}",
+    async (string host, ICredentialStore store, CancellationToken ct) =>
+    {
+        await store.DeleteAsync(host, ct);
+        return Results.NoContent();
     });
 
 app.MapGet("/api/v1/shares/local",
@@ -193,3 +228,4 @@ app.Run();
 public sealed record AssistantRequest(string Question);
 public sealed record NetworkScanRequest(string Cidr);
 public sealed record RemoteSystemRequest(string Host, string Username, string Password);
+public sealed record CredentialRequest(string? Host, string Username, string Password);

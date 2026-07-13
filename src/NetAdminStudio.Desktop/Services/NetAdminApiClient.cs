@@ -116,6 +116,11 @@ public sealed record AuditEntryDto(Guid Id, DateTimeOffset At, string Action, st
     public string AtText => At.LocalDateTime.ToString("dd/MM/yyyy HH:mm:ss");
 }
 
+public sealed record SavedCredentialDto(string Host, string Username)
+{
+    public string HostText => Host == "*" ? "(por defecto)" : Host;
+}
+
 public sealed record AutomationDto(
     Guid Id,
     string Name,
@@ -247,6 +252,16 @@ public sealed class NetAdminApiClient(HttpClient httpClient)
         return await response.Content.ReadFromJsonAsync<SystemInfoDto>(cancellationToken: ct)
             ?? throw new InvalidOperationException("El equipo remoto no devolvió información.");
     }
+
+    public async Task SaveCredentialAsync(string host, string username, string password, CancellationToken ct)
+    {
+        var response = await httpClient.PostAsJsonAsync(
+            "/api/v1/credentials", new { host, username, password }, ct);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task<List<SavedCredentialDto>> GetCredentialsAsync(CancellationToken ct) =>
+        await httpClient.GetFromJsonAsync<List<SavedCredentialDto>>("/api/v1/credentials", ct) ?? [];
 
     public async Task<List<AutomationDto>> GetAutomationsAsync(CancellationToken ct) =>
         await httpClient.GetFromJsonAsync<List<AutomationDto>>("/api/v1/automations", ct) ?? [];

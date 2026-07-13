@@ -22,4 +22,14 @@ public partial class EquiposView : UserControl
 
         await vm.LoadRemoteAsync(host, vm.RemoteUser, RemotePasswordBox.Password);
     }
+
+    private async void SaveCredential_Click(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is not MainViewModel vm)
+            return;
+
+        // Se guarda como credencial por defecto (host vacío) para usarla con cualquier equipo.
+        await vm.SaveCredentialAsync("", vm.RemoteUser, RemotePasswordBox.Password);
+        RemotePasswordBox.Clear();
+    }
 }

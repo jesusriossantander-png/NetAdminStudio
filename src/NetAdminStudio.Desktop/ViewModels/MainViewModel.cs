@@ -82,12 +82,7 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
         if (string.IsNullOrWhiteSpace(host))
             return;
 
-        if (string.IsNullOrWhiteSpace(user))
-        {
-            RemoteStatusText = "Ingresá usuario y contraseña de administrador del equipo.";
-            return;
-        }
-
+        // Si no se escribieron credenciales, la API usa las guardadas (cifradas).
         try
         {
             RemoteStatusText = $"Consultando {host}…";
@@ -109,6 +104,28 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
         _showingRemote = false;
         SelectedSystem = LocalSystem;
         RemoteStatusText = "";
+    }
+
+    /// <summary>Guarda una credencial (cifrada) para reutilizarla sin reescribirla.</summary>
+    public async Task SaveCredentialAsync(string host, string user, string password)
+    {
+        if (string.IsNullOrWhiteSpace(user) || string.IsNullOrWhiteSpace(password))
+        {
+            RemoteStatusText = "Ingresá usuario y contraseña para guardar.";
+            return;
+        }
+
+        try
+        {
+            await apiClient.SaveCredentialAsync(host, user, password, CancellationToken.None);
+            RemoteStatusText = string.IsNullOrWhiteSpace(host)
+                ? "Credencial guardada (por defecto). Ya no necesitás reescribirla."
+                : $"Credencial guardada para {host}.";
+        }
+        catch (Exception ex)
+        {
+            RemoteStatusText = $"No se pudo guardar la credencial: {ex.Message}";
+        }
     }
 
     [RelayCommand]
@@ -319,6 +336,15 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
             Audit.Clear();
             foreach (var item in await apiClient.GetAuditAsync(cts.Token))
                 Audit.Add(item);
+
+            // Precargar el usuario de la credencial por defecto (si hay).
+            if (string.IsNullOrWhiteSpace(RemoteUser))
+            {
+                var creds = await apiClient.GetCredentialsAsync(cts.Token);
+                var def = creds.FirstOrDefault(c => c.Host == "*");
+                if (def is not null)
+                    RemoteUser = def.Username;
+            }
 
             Status = $"Actualizado {DateTime.Now:HH:mm:ss}";
         }

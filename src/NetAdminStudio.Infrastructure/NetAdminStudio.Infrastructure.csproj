@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="System.IO.FileSystem.AccessControl" Version="5.0.0" />
     <PackageReference Include="System.Management" Version="8.0.0" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" />
     <ProjectReference Include="..\NetAdminStudio.Application\NetAdminStudio.Application.csproj" />
     <ProjectReference Include="..\NetAdminStudio.Domain\NetAdminStudio.Domain.csproj" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.7" />
