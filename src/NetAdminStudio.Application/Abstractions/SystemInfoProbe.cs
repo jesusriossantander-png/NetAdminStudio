@@ -38,3 +38,9 @@ public interface ISystemInfoProbe
 {
     Task<SystemInfo> GetLocalSystemInfoAsync(CancellationToken ct);
 }
+
+/// <summary>Sondeo del estado de un equipo remoto vía WMI (requiere credenciales).</summary>
+public interface IRemoteSystemInfoProbe
+{
+    Task<SystemInfo> GetAsync(string host, string username, string password, CancellationToken ct);
+}

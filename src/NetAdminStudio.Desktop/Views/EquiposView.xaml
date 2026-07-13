@@ -21,45 +21,48 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Detalle del equipo local -->
+            <!-- Detalle del equipo (local o remoto seleccionado) -->
             <Border Grid.Column="0" Style="{StaticResource Card}">
                 <StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <DockPanel Margin="0,0,0,8">
                         <TextBlock Text="🖥️" FontSize="24" VerticalAlignment="Center"/>
-                        <StackPanel Margin="10,0,0,0">
-                            <TextBlock Text="{Binding LocalSystem.MachineName}"
+                        <Button DockPanel.Dock="Right" Content="Este equipo"
+                                Command="{Binding ShowLocalSystemCommand}"
+                                VerticalAlignment="Center" FontSize="11" Padding="8,4"/>
+                        <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding SelectedSystem.MachineName}"
                                        FontSize="18" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding LocalSystem.OperatingSystem}"
+                            <TextBlock Text="{Binding SelectedSystem.OperatingSystem}"
                                        Foreground="{StaticResource MutedBrush}" FontSize="12"/>
                         </StackPanel>
-                    </StackPanel>
+                    </DockPanel>
 
-                    <TextBlock Text="{Binding LocalSystem.CpuText}"
+                    <TextBlock Text="{Binding SelectedSystem.CpuText}"
                                Foreground="{StaticResource MutedBrush}" FontSize="11"
                                TextWrapping="Wrap" Margin="0,0,0,10"/>
 
                     <UniformGrid Columns="3">
                         <controls:CircularGauge Label="CPU" Diameter="110"
                             Accent="{StaticResource AccentBrush}"
-                            Percent="{Binding LocalSystem.CpuUsagePercent, Mode=OneWay, FallbackValue=0, TargetNullValue=0}"/>
+                            Percent="{Binding SelectedSystem.CpuUsagePercent, Mode=OneWay, FallbackValue=0, TargetNullValue=0}"/>
                         <controls:CircularGauge Label="Memoria" Diameter="110"
                             Accent="{StaticResource PurpleBrush}"
-                            Percent="{Binding LocalSystem.MemoryUsagePercent, Mode=OneWay, FallbackValue=0}"/>
+                            Percent="{Binding SelectedSystem.MemoryUsagePercent, Mode=OneWay, FallbackValue=0}"/>
                         <controls:CircularGauge Label="Disco C:" Diameter="110"
                             Accent="{StaticResource OrangeBrush}"
-                            Percent="{Binding LocalSystem.Disks[0].UsagePercent, Mode=OneWay, FallbackValue=0}"/>
+                            Percent="{Binding SelectedSystem.Disks[0].UsagePercent, Mode=OneWay, FallbackValue=0}"/>
                     </UniformGrid>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,6,0,10">
-                        <TextBlock Text="{Binding LocalSystem.MemoryText}"
+                        <TextBlock Text="{Binding SelectedSystem.MemoryText}"
                                    Foreground="{StaticResource MutedBrush}" FontSize="11"/>
                         <TextBlock Text="  ·  " Foreground="{StaticResource MutedBrush}" FontSize="11"/>
-                        <TextBlock Text="{Binding LocalSystem.ServicesText}"
+                        <TextBlock Text="{Binding SelectedSystem.ServicesText}"
                                    Foreground="{StaticResource MutedBrush}" FontSize="11"/>
                     </StackPanel>
 
                     <TextBlock Text="Discos" FontWeight="SemiBold" FontSize="13" Margin="0,4,0,6"/>
-                    <ItemsControl ItemsSource="{Binding LocalSystem.Disks}">
+                    <ItemsControl ItemsSource="{Binding SelectedSystem.Disks}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border Background="{StaticResource SurfaceAltBrush}"
@@ -87,12 +90,34 @@
                 <StackPanel>
                     <TextBlock Text="Computadoras descubiertas en la red"
                                FontSize="16" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                    <TextBlock Text="Servidores, workstations y Raspberry Pi detectados por el escaneo. El detalle remoto (CPU/RAM/servicios) llegará con WMI remoto."
+                    <TextBlock Text="Elegí una computadora y consultá su detalle real (CPU/RAM/discos) por WMI remoto. Requiere usuario y contraseña de administrador de ese equipo, y que tenga WMI habilitado."
                                Foreground="{StaticResource MutedBrush}" FontSize="11"
-                               TextWrapping="Wrap" Margin="0,0,0,10"/>
+                               TextWrapping="Wrap" Margin="0,0,0,8"/>
+
+                    <Border Background="{StaticResource SurfaceAltBrush}" CornerRadius="8"
+                            Padding="10" Margin="0,0,0,10">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Usuario:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                            <TextBox Width="150" VerticalContentAlignment="Center"
+                                     Text="{Binding RemoteUser, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="Contraseña:" VerticalAlignment="Center" Margin="12,0,6,0"/>
+                            <PasswordBox x:Name="RemotePasswordBox" Width="150"
+                                         Background="{StaticResource SurfaceBrush}"
+                                         Foreground="{StaticResource TextBrush}"
+                                         VerticalContentAlignment="Center" Padding="6,4"/>
+                            <Button Content="🔍  Ver detalle del seleccionado"
+                                    Style="{StaticResource PrimaryButton}"
+                                    Margin="12,0,0,0" Click="LoadRemote_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Text="{Binding RemoteStatusText}" Foreground="{StaticResource AccentBrush}"
+                               FontSize="11" TextWrapping="Wrap" Margin="2,0,0,8"/>
+
                     <DataGrid ItemsSource="{Binding Computers}"
+                              SelectedItem="{Binding SelectedComputer, Mode=TwoWay}"
                               AutoGenerateColumns="False" IsReadOnly="True"
-                              b:RowDetail.Enabled="True" Height="500">
+                              b:RowDetail.Enabled="True" Height="430">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="IP" Binding="{Binding IpAddress}" Width="120"/>
                             <DataGridTextColumn Header="Nombre / Host" Binding="{Binding Name}" Width="220"/>

@@ -24,6 +24,7 @@ public static class DependencyInjection
         services.AddSingleton<IVendorLookup, OuiVendorLookup>();
         services.AddSingleton<IPrinterProbe, Printers.WmiPrinterProbe>();
         services.AddSingleton<ISystemInfoProbe, System.WmiSystemInfoProbe>();
+        services.AddSingleton<IRemoteSystemInfoProbe, System.WmiRemoteSystemInfoProbe>();
         services.AddSingleton<IShareProbe, System.WmiShareProbe>();
         services.AddSingleton<IUserProbe, System.WmiUserProbe>();
         services.AddSingleton<IGroupProbe, System.WmiGroupProbe>();

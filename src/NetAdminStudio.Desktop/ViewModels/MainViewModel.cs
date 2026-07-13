@@ -52,6 +52,22 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
     [ObservableProperty]
     private SystemInfoDto? localSystem;
 
+    // Lo que muestra el panel de detalle en Equipos: por defecto el equipo local,
+    // o uno remoto si el usuario consulta otra PC.
+    [ObservableProperty]
+    private SystemInfoDto? selectedSystem;
+
+    [ObservableProperty]
+    private string remoteUser = "";
+
+    [ObservableProperty]
+    private string remoteStatusText = "";
+
+    [ObservableProperty]
+    private AssetDto? selectedComputer;
+
+    private bool _showingRemote;
+
     [ObservableProperty]
     private string selectedSection = "dashboard";
 
@@ -59,6 +75,41 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
 
     [RelayCommand]
     private void Navigate(string section) => SelectedSection = section;
+
+    /// <summary>Consulta un equipo remoto por WMI y lo muestra en el panel de detalle.</summary>
+    public async Task LoadRemoteAsync(string host, string user, string password)
+    {
+        if (string.IsNullOrWhiteSpace(host))
+            return;
+
+        if (string.IsNullOrWhiteSpace(user))
+        {
+            RemoteStatusText = "Ingresá usuario y contraseña de administrador del equipo.";
+            return;
+        }
+
+        try
+        {
+            RemoteStatusText = $"Consultando {host}…";
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
+            var info = await apiClient.GetRemoteSystemInfoAsync(host, user, password, cts.Token);
+            SelectedSystem = info;
+            _showingRemote = true;
+            RemoteStatusText = $"Mostrando {host}.";
+        }
+        catch (Exception ex)
+        {
+            RemoteStatusText = $"No se pudo consultar {host}: {ex.Message}";
+        }
+    }
+
+    [RelayCommand]
+    private void ShowLocalSystem()
+    {
+        _showingRemote = false;
+        SelectedSystem = LocalSystem;
+        RemoteStatusText = "";
+    }
 
     [RelayCommand]
     private void ExportInventory()
@@ -242,6 +293,8 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
                 Alerts.Add(item);
 
             LocalSystem = await apiClient.GetSystemInfoAsync(cts.Token);
+            if (!_showingRemote)
+                SelectedSystem = LocalSystem;
 
             Automations.Clear();
             foreach (var item in await apiClient.GetAutomationsAsync(cts.Token))

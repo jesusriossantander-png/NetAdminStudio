@@ -46,6 +46,7 @@ public partial class DetailWindow : Window
     private DetailWindow(string title, string? subtitle, IEnumerable<Field> fields)
     {
         InitializeComponent();
+        SourceInitialized += (_, _) => DarkTitleBar.Apply(this);
         TitleText.Text = title;
         Title = title;
         SubtitleText.Text = subtitle ?? "";

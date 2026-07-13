@@ -224,6 +224,30 @@ public sealed class NetAdminApiClient(HttpClient httpClient)
         await httpClient.GetFromJsonAsync<SystemInfoDto>("/api/v1/system/local", ct)
             ?? throw new InvalidOperationException("La API devolvió información vacía del sistema.");
 
+    public async Task<SystemInfoDto> GetRemoteSystemInfoAsync(
+        string host, string username, string password, CancellationToken ct)
+    {
+        var response = await httpClient.PostAsJsonAsync(
+            "/api/v1/system/remote", new { host, username, password }, ct);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var body = await response.Content.ReadAsStringAsync(ct);
+            var detail = body;
+            try
+            {
+                using var doc = System.Text.Json.JsonDocument.Parse(body);
+                if (doc.RootElement.TryGetProperty("detail", out var d))
+                    detail = d.GetString() ?? body;
+            }
+            catch { /* no era JSON; usamos el cuerpo tal cual */ }
+            throw new InvalidOperationException(detail);
+        }
+
+        return await response.Content.ReadFromJsonAsync<SystemInfoDto>(cancellationToken: ct)
+            ?? throw new InvalidOperationException("El equipo remoto no devolvió información.");
+    }
+
     public async Task<List<AutomationDto>> GetAutomationsAsync(CancellationToken ct) =>
         await httpClient.GetFromJsonAsync<List<AutomationDto>>("/api/v1/automations", ct) ?? [];
 

@@ -9,6 +9,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = viewModel;
+        SourceInitialized += (_, _) => DarkTitleBar.Apply(this);
         Loaded += async (_, _) =>
         {
             await viewModel.RefreshCommand.ExecuteAsync(null);

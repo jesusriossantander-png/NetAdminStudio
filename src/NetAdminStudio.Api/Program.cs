@@ -72,6 +72,25 @@ app.MapGet("/api/v1/system/local",
     async (ISystemInfoProbe probe, CancellationToken ct) =>
         Results.Ok(await probe.GetLocalSystemInfoAsync(ct)));
 
+app.MapPost("/api/v1/system/remote",
+    async (RemoteSystemRequest request, IRemoteSystemInfoProbe probe,
+     IAuditLog audit, CancellationToken ct) =>
+    {
+        try
+        {
+            var info = await probe.GetAsync(request.Host, request.Username, request.Password, ct);
+            await audit.LogAsync("Consulta remota WMI", $"Equipo {request.Host}", ct);
+            return Results.Ok(info);
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(
+                title: "No se pudo consultar el equipo remoto",
+                detail: ex.Message,
+                statusCode: 502);
+        }
+    });
+
 app.MapGet("/api/v1/shares/local",
     async (IShareProbe probe, CancellationToken ct) =>
         Results.Ok(await probe.GetLocalSharesAsync(ct)));
@@ -173,3 +192,4 @@ app.Run();
 
 public sealed record AssistantRequest(string Question);
 public sealed record NetworkScanRequest(string Cidr);
+public sealed record RemoteSystemRequest(string Host, string Username, string Password);
