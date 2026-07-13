@@ -159,6 +159,7 @@
 
         <Style TargetType="DataGridCell">
             <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Padding" Value="10,0"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -172,6 +173,13 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <!-- Al seleccionar, la celda queda transparente (se ve el fondo oscuro de la fila) y el texto legible. -->
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style TargetType="DataGridRow">

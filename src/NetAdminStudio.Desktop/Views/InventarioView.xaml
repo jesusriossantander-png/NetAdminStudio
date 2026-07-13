@@ -1,15 +1,15 @@
 <UserControl x:Class="NetAdminStudio.Desktop.Views.InventarioView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:b="clr-namespace:NetAdminStudio.Desktop.Behaviors">
     <StackPanel Margin="18">
-        <DockPanel Margin="6,4,6,0">
+        <DockPanel Margin="6,4,6,0" LastChildFill="False">
             <StackPanel DockPanel.Dock="Left">
                 <TextBlock Text="Inventario" FontSize="26" FontWeight="SemiBold"/>
                 <TextBlock Text="Todos los activos registrados en la infraestructura"
                            Foreground="{StaticResource MutedBrush}"/>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                <Button Content="↻  Actualizar" Command="{Binding RefreshCommand}"/>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center"><Button Content="↻  Actualizar" Command="{Binding RefreshCommand}"/>
                 <Button Style="{StaticResource PrimaryButton}" Content="⬇  Exportar CSV"
                         Command="{Binding ExportInventoryCommand}"/>
             </StackPanel>
@@ -26,7 +26,7 @@
                 </DockPanel>
                 <DataGrid ItemsSource="{Binding Assets}"
                           AutoGenerateColumns="False" IsReadOnly="True"
-                          Height="560">
+                          b:RowDetail.Enabled="True" Height="560">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="IP" Binding="{Binding IpAddress}" Width="120"/>
                         <DataGridTextColumn Header="Nombre / Host" Binding="{Binding Name}" Width="200"/>
