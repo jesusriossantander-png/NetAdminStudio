@@ -122,6 +122,7 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
     public ObservableCollection<AssetDto> Computers { get; } = [];
     public ObservableCollection<PrinterDto> Printers { get; } = [];
     public ObservableCollection<AlertDto> Alerts { get; } = [];
+    public ObservableCollection<AutomationDto> Automations { get; } = [];
 
     [RelayCommand]
     private async Task RefreshAsync()
@@ -152,6 +153,10 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
                 Alerts.Add(item);
 
             LocalSystem = await apiClient.GetSystemInfoAsync(cts.Token);
+
+            Automations.Clear();
+            foreach (var item in await apiClient.GetAutomationsAsync(cts.Token))
+                Automations.Add(item);
 
             Status = $"Actualizado {DateTime.Now:HH:mm:ss}";
         }

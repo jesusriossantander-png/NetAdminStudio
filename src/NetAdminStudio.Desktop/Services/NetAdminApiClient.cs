@@ -99,6 +99,18 @@ public sealed record ScanStartedDto(Guid ScanId);
 
 public sealed record PrinterScanResultDto(int Discovered);
 
+public sealed record AutomationDto(
+    Guid Id,
+    string Name,
+    string TriggerType,
+    string ConditionJson,
+    string ActionType,
+    string ActionJson,
+    bool Enabled)
+{
+    public string EnabledText => Enabled ? "Activa" : "Inactiva";
+}
+
 public sealed record DiskDto(string Drive, double TotalGb, double FreeGb, int UsagePercent)
 {
     public string Display => $"{Drive}  {UsagePercent}%  ({FreeGb:0.#} GB libres de {TotalGb:0.#} GB)";
@@ -194,6 +206,9 @@ public sealed class NetAdminApiClient(HttpClient httpClient)
     public async Task<SystemInfoDto> GetSystemInfoAsync(CancellationToken ct) =>
         await httpClient.GetFromJsonAsync<SystemInfoDto>("/api/v1/system/local", ct)
             ?? throw new InvalidOperationException("La API devolvió información vacía del sistema.");
+
+    public async Task<List<AutomationDto>> GetAutomationsAsync(CancellationToken ct) =>
+        await httpClient.GetFromJsonAsync<List<AutomationDto>>("/api/v1/automations", ct) ?? [];
 
     public async Task AcknowledgeAlertAsync(Guid id, CancellationToken ct)
     {

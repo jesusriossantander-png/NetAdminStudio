@@ -1,0 +1,64 @@
+<UserControl x:Class="NetAdminStudio.Desktop.Views.ConfiguracionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Margin="18">
+        <StackPanel Margin="6,4,6,0">
+            <TextBlock Text="Configuración" FontSize="26" FontWeight="SemiBold"/>
+            <TextBlock Text="Preferencias de la aplicación"
+                       Foreground="{StaticResource MutedBrush}"/>
+        </StackPanel>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="Escaneo" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                    <TextBlock Text="Rango de red por defecto (CIDR)"
+                               Foreground="{StaticResource MutedBrush}" FontSize="12"/>
+                    <TextBox Text="{Binding ScanCidr, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="0,4,0,10" Width="220" HorizontalAlignment="Left"/>
+                    <TextBlock Foreground="{StaticResource MutedBrush}" FontSize="11" TextWrapping="Wrap"
+                               Text="Este valor se usa como rango inicial en la pantalla de Red. Máximo permitido: /22 (1024 direcciones)."/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="Sistema" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                    <DockPanel Margin="0,0,0,6">
+                        <TextBlock Text="Servidor API" DockPanel.Dock="Left" Foreground="{StaticResource MutedBrush}"/>
+                        <TextBlock Text="http://localhost:5188" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,6">
+                        <TextBlock Text="Refresco automático" DockPanel.Dock="Left" Foreground="{StaticResource MutedBrush}"/>
+                        <TextBlock Text="cada 30 s" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,6">
+                        <TextBlock Text="Monitoreo de red" DockPanel.Dock="Left" Foreground="{StaticResource MutedBrush}"/>
+                        <TextBlock Text="cada 60 s (automático)" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <TextBlock Text="Estado" DockPanel.Dock="Left" Foreground="{StaticResource MutedBrush}"/>
+                        <TextBlock Text="{Binding Status}" DockPanel.Dock="Right" HorizontalAlignment="Right"
+                                   Foreground="{StaticResource AccentBrush}"/>
+                    </DockPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Border Style="{StaticResource Card}">
+            <StackPanel>
+                <TextBlock Text="Acerca de" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                <TextBlock Text="NetAdmin Studio Enterprise" FontWeight="SemiBold"/>
+                <TextBlock Text="Torre de control de infraestructura Windows: red, impresoras, equipos y alertas desde una sola consola."
+                           Foreground="{StaticResource MutedBrush}" FontSize="12" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                <TextBlock Text="Versión de desarrollo · .NET 8 · WPF"
+                           Foreground="{StaticResource MutedBrush}" FontSize="11" Margin="0,8,0,0"/>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>

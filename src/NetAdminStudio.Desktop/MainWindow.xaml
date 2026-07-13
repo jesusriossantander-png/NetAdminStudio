@@ -49,8 +49,12 @@
                             Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=alertas}"/>
                     <Button Style="{StaticResource NavButton}" Content="📋   Auditoría"/>
                     <Button Style="{StaticResource NavButton}" Content="📄   Informes"/>
-                    <Button Style="{StaticResource NavButton}" Content="🤖   Automatizaciones"/>
-                    <Button Style="{StaticResource NavButton}" Content="⚙️   Configuración"/>
+                    <Button Content="🤖   Automatizaciones"
+                            Command="{Binding NavigateCommand}" CommandParameter="automatizaciones"
+                            Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=automatizaciones}"/>
+                    <Button Content="⚙️   Configuración"
+                            Command="{Binding NavigateCommand}" CommandParameter="configuracion"
+                            Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=configuracion}"/>
                 </StackPanel>
 
                 <Border DockPanel.Dock="Bottom" Style="{StaticResource Card}" Margin="0,8,0,0" Padding="10">
@@ -79,6 +83,10 @@
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=alertas}"/>
                 <views:InventarioView
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=inventario}"/>
+                <views:AutomatizacionesView
+                    Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=automatizaciones}"/>
+                <views:ConfiguracionView
+                    Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=configuracion}"/>
             </Grid>
         </ScrollViewer>
     </Grid>

@@ -1,0 +1,51 @@
+<UserControl x:Class="NetAdminStudio.Desktop.Views.AutomatizacionesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Margin="18">
+        <DockPanel Margin="6,4,6,0">
+            <StackPanel DockPanel.Dock="Left">
+                <TextBlock Text="Automatizaciones" FontSize="26" FontWeight="SemiBold"/>
+                <TextBlock Text="Reglas que reaccionan a eventos de la infraestructura"
+                           Foreground="{StaticResource MutedBrush}"/>
+            </StackPanel>
+            <Button DockPanel.Dock="Right" Content="↻  Actualizar"
+                    Command="{Binding RefreshCommand}" VerticalAlignment="Center"/>
+        </DockPanel>
+
+        <Border Style="{StaticResource Card}">
+            <StackPanel>
+                <TextBlock Text="Reglas configuradas" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Todavía no hay reglas de automatización."
+                           Foreground="{StaticResource MutedBrush}" Margin="2,6"
+                           Visibility="{Binding Automations.Count, Converter={StaticResource ZeroToVisibility}}"/>
+
+                <ItemsControl ItemsSource="{Binding Automations}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{StaticResource SurfaceAltBrush}"
+                                    CornerRadius="8" Padding="12" Margin="0,0,0,8">
+                                <DockPanel>
+                                    <Border DockPanel.Dock="Right" Background="{StaticResource SurfaceBrush}"
+                                            CornerRadius="6" Padding="10,4" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding EnabledText}" FontSize="11"
+                                                   Foreground="{StaticResource AccentBrush}"/>
+                                    </Border>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                            <TextBlock Text="Cuando: " FontSize="11" Foreground="{StaticResource MutedBrush}"/>
+                                            <TextBlock Text="{Binding TriggerType}" FontSize="11"/>
+                                            <TextBlock Text="   →   Acción: " FontSize="11" Foreground="{StaticResource MutedBrush}"/>
+                                            <TextBlock Text="{Binding ActionType}" FontSize="11"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DockPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>
