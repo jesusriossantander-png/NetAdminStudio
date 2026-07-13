@@ -1,0 +1,153 @@
+<UserControl x:Class="NetAdminStudio.Desktop.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:NetAdminStudio.Desktop.Controls">
+    <StackPanel Margin="18">
+        <DockPanel Margin="6,4,6,0">
+            <StackPanel DockPanel.Dock="Left">
+                <TextBlock Text="Centro de Operaciones" FontSize="26" FontWeight="SemiBold"/>
+                <TextBlock Text="Estado general de la infraestructura"
+                           Foreground="{StaticResource MutedBrush}"/>
+            </StackPanel>
+            <Button DockPanel.Dock="Right" Style="{StaticResource PrimaryButton}"
+                    Content="↻  Actualizar" Command="{Binding RefreshCommand}"
+                    VerticalAlignment="Center"/>
+        </DockPanel>
+
+        <UniformGrid Columns="6" Margin="0,14,0,4">
+            <Border Style="{StaticResource Card}" Background="{StaticResource GreenBrush}" BorderThickness="0">
+                <StackPanel>
+                    <TextBlock Text="🖥️" FontSize="20"/>
+                    <TextBlock Text="{Binding Dashboard.Online}" FontSize="30" FontWeight="Bold" Margin="0,4,0,0"/>
+                    <TextBlock Text="Equipos online" Foreground="#DCFCE7" FontSize="12"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}" Background="{StaticResource RedBrush}" BorderThickness="0">
+                <StackPanel>
+                    <TextBlock Text="⚠️" FontSize="20"/>
+                    <TextBlock Text="{Binding Dashboard.Offline}" FontSize="30" FontWeight="Bold" Margin="0,4,0,0"/>
+                    <TextBlock Text="Equipos offline" Foreground="#FEE2E2" FontSize="12"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}" Background="{StaticResource OrangeBrush}" BorderThickness="0">
+                <StackPanel>
+                    <TextBlock Text="🔔" FontSize="20"/>
+                    <TextBlock Text="{Binding Dashboard.OpenAlerts}" FontSize="30" FontWeight="Bold" Margin="0,4,0,0"/>
+                    <TextBlock Text="Alertas activas" Foreground="#FEF3C7" FontSize="12"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}" Background="{StaticResource PurpleBrush}" BorderThickness="0">
+                <StackPanel>
+                    <TextBlock Text="🖨️" FontSize="20"/>
+                    <TextBlock Text="{Binding Dashboard.Printers}" FontSize="30" FontWeight="Bold" Margin="0,4,0,0"/>
+                    <TextBlock Text="Impresoras" Foreground="#EDE9FE" FontSize="12"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}" Background="{StaticResource BlueBrush}" BorderThickness="0">
+                <StackPanel>
+                    <TextBlock Text="📦" FontSize="20"/>
+                    <TextBlock Text="{Binding Dashboard.Assets}" FontSize="30" FontWeight="Bold" Margin="0,4,0,0"/>
+                    <TextBlock Text="Activos totales" Foreground="#DBEAFE" FontSize="12"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}" Background="{StaticResource CyanBrush}" BorderThickness="0">
+                <StackPanel>
+                    <TextBlock Text="📉" FontSize="20"/>
+                    <TextBlock Text="{Binding Dashboard.Degraded}" FontSize="30" FontWeight="Bold" Margin="0,4,0,0"/>
+                    <TextBlock Text="Degradados" Foreground="#CFFAFE" FontSize="12"/>
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="Health Score Global" FontSize="16" FontWeight="SemiBold"
+                                   HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                        <controls:CircularGauge Diameter="150"
+                            Accent="{StaticResource GreenBrush}"
+                            Percent="{Binding Dashboard.HealthScore, Mode=OneWay, FallbackValue=0}"
+                            Label="{Binding Dashboard.HealthLabel, Mode=OneWay}"
+                            HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Left" Text="Este equipo"
+                                       FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding LocalSystem.MachineName}" DockPanel.Dock="Right"
+                                       HorizontalAlignment="Right" FontWeight="SemiBold"
+                                       Foreground="{StaticResource AccentBrush}" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <TextBlock Text="{Binding LocalSystem.OperatingSystem}"
+                                   Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="0,2,0,0"/>
+                        <TextBlock Text="{Binding LocalSystem.CpuText}"
+                                   Foreground="{StaticResource MutedBrush}" FontSize="11"
+                                   TextWrapping="Wrap" Margin="0,2,0,8"/>
+
+                        <UniformGrid Columns="3" Margin="0,4,0,0">
+                            <controls:CircularGauge Label="CPU"
+                                Accent="{StaticResource AccentBrush}"
+                                Percent="{Binding LocalSystem.CpuUsagePercent, Mode=OneWay, FallbackValue=0, TargetNullValue=0}"/>
+                            <controls:CircularGauge Label="Memoria"
+                                Accent="{StaticResource PurpleBrush}"
+                                Percent="{Binding LocalSystem.MemoryUsagePercent, Mode=OneWay, FallbackValue=0}"/>
+                            <controls:CircularGauge Label="Disco C:"
+                                Accent="{StaticResource OrangeBrush}"
+                                Percent="{Binding LocalSystem.Disks[0].UsagePercent, Mode=OneWay, FallbackValue=0}"/>
+                        </UniformGrid>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,6,0,0">
+                            <TextBlock Text="{Binding LocalSystem.MemoryText}"
+                                       Foreground="{StaticResource MutedBrush}" FontSize="11"/>
+                            <TextBlock Text="  ·  " Foreground="{StaticResource MutedBrush}" FontSize="11"/>
+                            <TextBlock Text="{Binding LocalSystem.ServicesText}"
+                                       Foreground="{StaticResource MutedBrush}" FontSize="11"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="Alertas abiertas" FontSize="16" FontWeight="SemiBold"/>
+                        <ItemsControl ItemsSource="{Binding Alerts}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="{StaticResource SurfaceAltBrush}"
+                                            CornerRadius="8" Padding="10" Margin="0,8,0,0">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Title}" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding OpenedAt}"
+                                                       Foreground="{StaticResource MutedBrush}" FontSize="11"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="Asistente de operaciones" FontSize="16" FontWeight="SemiBold"/>
+                        <TextBox Text="{Binding AssistantQuestion, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,10,0,6"/>
+                        <Button Style="{StaticResource PrimaryButton}" Content="Preguntar"
+                                Command="{Binding AskAssistantCommand}" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding AssistantAnswer}" TextWrapping="Wrap" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</UserControl>

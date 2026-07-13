@@ -36,7 +36,13 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
     [ObservableProperty]
     private SystemInfoDto? localSystem;
 
+    [ObservableProperty]
+    private string selectedSection = "dashboard";
+
     public bool CanScan => !IsScanning;
+
+    [RelayCommand]
+    private void Navigate(string section) => SelectedSection = section;
 
     public ObservableCollection<AssetDto> Assets { get; } = [];
     public ObservableCollection<PrinterDto> Printers { get; } = [];
