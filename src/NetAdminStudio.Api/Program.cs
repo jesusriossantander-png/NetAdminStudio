@@ -61,9 +61,10 @@ app.MapGet("/api/v1/printers",
         Results.Ok(await repository.GetAllAsync(ct)));
 
 app.MapPost("/api/v1/printers/scan",
-    async (PrinterDiscoveryService service, CancellationToken ct) =>
+    async (PrinterDiscoveryService service, IAuditLog audit, CancellationToken ct) =>
     {
         var count = await service.DiscoverAsync(ct);
+        await audit.LogAsync("Detección de impresoras", $"{count} impresoras detectadas", ct);
         return Results.Ok(new { discovered = count });
     });
 
@@ -87,12 +88,16 @@ app.MapGet("/api/v1/security/share-permissions",
     async (IPermissionProbe probe, CancellationToken ct) =>
         Results.Ok(await probe.GetSharePermissionsAsync(ct)));
 
+app.MapGet("/api/v1/audit",
+    async (IAuditLog audit, CancellationToken ct) =>
+        Results.Ok(await audit.GetRecentAsync(200, ct)));
+
 app.MapGet("/api/v1/alerts",
     async (IAlertRepository repository, CancellationToken ct) =>
         Results.Ok(await repository.GetOpenAsync(ct)));
 
 app.MapPost("/api/v1/alerts/{id:guid}/acknowledge",
-    async (Guid id, IAlertRepository repository, CancellationToken ct) =>
+    async (Guid id, IAlertRepository repository, IAuditLog audit, CancellationToken ct) =>
     {
         var alert = await repository.GetAsync(id, ct);
         if (alert is null)
@@ -100,11 +105,12 @@ app.MapPost("/api/v1/alerts/{id:guid}/acknowledge",
 
         alert.Acknowledge();
         await repository.SaveAsync(alert, ct);
+        await audit.LogAsync("Alerta reconocida", alert.Title, ct);
         return Results.NoContent();
     });
 
 app.MapPost("/api/v1/alerts/{id:guid}/resolve",
-    async (Guid id, IAlertRepository repository, CancellationToken ct) =>
+    async (Guid id, IAlertRepository repository, IAuditLog audit, CancellationToken ct) =>
     {
         var alert = await repository.GetAsync(id, ct);
         if (alert is null)
@@ -112,6 +118,7 @@ app.MapPost("/api/v1/alerts/{id:guid}/resolve",
 
         alert.Resolve();
         await repository.SaveAsync(alert, ct);
+        await audit.LogAsync("Alerta resuelta", alert.Title, ct);
         return Results.NoContent();
     });
 
@@ -138,13 +145,15 @@ app.MapPost("/api/v1/assistant/ask",
         Results.Ok(await assistant.AskAsync(request.Question, ct)));
 
 app.MapPost("/api/v1/network/scan",
-    (NetworkScanRequest request, ScanJobManager jobs, NetworkDiscoveryEngine engine) =>
+    async (NetworkScanRequest request, ScanJobManager jobs, NetworkDiscoveryEngine engine,
+     IAuditLog audit, CancellationToken ct) =>
     {
         try
         {
             // Valida el CIDR temprano (lanza si es inválido o demasiado grande).
             _ = Cidr.Hosts(request.Cidr);
             var id = jobs.Start(request.Cidr, engine);
+            await audit.LogAsync("Escaneo de red", $"Rango {request.Cidr}", ct);
             return Results.Accepted($"/api/v1/network/scan/{id}", new { scanId = id });
         }
         catch (ArgumentException ex)

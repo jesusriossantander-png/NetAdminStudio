@@ -111,6 +111,11 @@ public sealed record LocalGroupDto(string Name, string? Description);
 public sealed record FolderPermissionDto(
     string Share, string Path, string Identity, string Rights, string Access);
 
+public sealed record AuditEntryDto(Guid Id, DateTimeOffset At, string Action, string Detail)
+{
+    public string AtText => At.LocalDateTime.ToString("dd/MM/yyyy HH:mm:ss");
+}
+
 public sealed record AutomationDto(
     Guid Id,
     string Name,
@@ -234,6 +239,9 @@ public sealed class NetAdminApiClient(HttpClient httpClient)
     public async Task<List<FolderPermissionDto>> GetSharePermissionsAsync(CancellationToken ct) =>
         await httpClient.GetFromJsonAsync<List<FolderPermissionDto>>(
             "/api/v1/security/share-permissions", ct) ?? [];
+
+    public async Task<List<AuditEntryDto>> GetAuditAsync(CancellationToken ct) =>
+        await httpClient.GetFromJsonAsync<List<AuditEntryDto>>("/api/v1/audit", ct) ?? [];
 
     public async Task AcknowledgeAlertAsync(Guid id, CancellationToken ct)
     {

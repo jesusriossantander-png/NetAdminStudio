@@ -69,6 +69,13 @@ CREATE TABLE IF NOT EXISTS automation_rules(
  action_type TEXT NOT NULL,
  action_json TEXT NOT NULL,
  enabled INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS audit_log(
+ id TEXT PRIMARY KEY,
+ at TEXT NOT NULL,
+ action TEXT NOT NULL,
+ detail TEXT NOT NULL
 );";
         command.ExecuteNonQuery();
 

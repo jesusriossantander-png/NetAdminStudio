@@ -13,6 +13,7 @@ public static class DependencyInjection
         string connectionString)
     {
         services.AddSingleton(new Database(connectionString));
+        services.AddScoped<IAuditLog, SqliteAuditLog>();
         services.AddScoped<IAssetRepository, AssetRepository>();
         services.AddScoped<IPrinterRepository, PrinterRepository>();
         services.AddScoped<IAlertRepository, AlertRepository>();
