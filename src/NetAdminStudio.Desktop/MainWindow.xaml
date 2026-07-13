@@ -188,6 +188,53 @@
                     <StackPanel Grid.Column="1">
                         <Border Style="{StaticResource Card}">
                             <StackPanel>
+                                <DockPanel>
+                                    <TextBlock DockPanel.Dock="Left" Text="Este equipo"
+                                               FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding LocalSystem.MachineName}" DockPanel.Dock="Right"
+                                               HorizontalAlignment="Right" FontWeight="SemiBold"
+                                               Foreground="{StaticResource AccentBrush}" VerticalAlignment="Center"/>
+                                </DockPanel>
+                                <TextBlock Text="{Binding LocalSystem.OperatingSystem}"
+                                           Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="0,2,0,0"/>
+                                <TextBlock Text="{Binding LocalSystem.CpuText}"
+                                           Foreground="{StaticResource MutedBrush}" FontSize="11"
+                                           TextWrapping="Wrap" Margin="0,2,0,8"/>
+
+                                <UniformGrid Columns="3">
+                                    <StackPanel>
+                                        <TextBlock Text="CPU" Foreground="{StaticResource MutedBrush}" FontSize="11"/>
+                                        <TextBlock Text="{Binding LocalSystem.CpuUsageText}" FontSize="22" FontWeight="Bold"/>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock Text="Memoria" Foreground="{StaticResource MutedBrush}" FontSize="11"/>
+                                        <TextBlock FontSize="22" FontWeight="Bold">
+                                            <Run Text="{Binding LocalSystem.MemoryUsagePercent, Mode=OneWay}"/><Run Text="%"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock Text="Servicios" Foreground="{StaticResource MutedBrush}" FontSize="11"/>
+                                        <TextBlock Text="{Binding LocalSystem.ServicesRunning}" FontSize="22" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </UniformGrid>
+
+                                <TextBlock Text="{Binding LocalSystem.MemoryText}"
+                                           Foreground="{StaticResource MutedBrush}" FontSize="11" Margin="0,6,0,0"/>
+
+                                <TextBlock Text="Discos" FontWeight="SemiBold" FontSize="12" Margin="0,10,0,4"/>
+                                <ItemsControl ItemsSource="{Binding LocalSystem.Disks}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Display}" FontSize="11"
+                                                       Foreground="{StaticResource MutedBrush}" Margin="0,1"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
                                 <TextBlock Text="Alertas abiertas" FontSize="16" FontWeight="SemiBold"/>
                                 <ItemsControl ItemsSource="{Binding Alerts}">
                                     <ItemsControl.ItemTemplate>

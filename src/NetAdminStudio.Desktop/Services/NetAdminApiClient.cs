@@ -82,6 +82,33 @@ public sealed record ScanStartedDto(Guid ScanId);
 
 public sealed record PrinterScanResultDto(int Discovered);
 
+public sealed record DiskDto(string Drive, double TotalGb, double FreeGb, int UsagePercent)
+{
+    public string Display => $"{Drive}  {UsagePercent}%  ({FreeGb:0.#} GB libres de {TotalGb:0.#} GB)";
+}
+
+public sealed record SystemInfoDto(
+    string MachineName,
+    string OperatingSystem,
+    string? CpuModel,
+    int CpuCores,
+    int LogicalProcessors,
+    int? CpuUsagePercent,
+    double TotalMemoryGb,
+    double UsedMemoryGb,
+    int MemoryUsagePercent,
+    int ServicesRunning,
+    int ServicesTotal,
+    IReadOnlyList<DiskDto> Disks)
+{
+    public string CpuText => CpuModel is null
+        ? "CPU no disponible"
+        : $"{CpuModel}  ·  {CpuCores} núcleos / {LogicalProcessors} hilos";
+    public string CpuUsageText => CpuUsagePercent is null ? "—" : $"{CpuUsagePercent}%";
+    public string MemoryText => $"{UsedMemoryGb:0.#} GB / {TotalMemoryGb:0.#} GB  ({MemoryUsagePercent}%)";
+    public string ServicesText => $"{ServicesRunning} activos de {ServicesTotal}";
+}
+
 public sealed record ScanStatusDto(
     Guid Id,
     string Cidr,
@@ -146,4 +173,8 @@ public sealed class NetAdminApiClient(HttpClient httpClient)
             cancellationToken: ct);
         return dto?.Discovered ?? 0;
     }
+
+    public async Task<SystemInfoDto> GetSystemInfoAsync(CancellationToken ct) =>
+        await httpClient.GetFromJsonAsync<SystemInfoDto>("/api/v1/system/local", ct)
+            ?? throw new InvalidOperationException("La API devolvió información vacía del sistema.");
 }

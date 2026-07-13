@@ -65,6 +65,10 @@ app.MapPost("/api/v1/printers/scan",
         return Results.Ok(new { discovered = count });
     });
 
+app.MapGet("/api/v1/system/local",
+    async (ISystemInfoProbe probe, CancellationToken ct) =>
+        Results.Ok(await probe.GetLocalSystemInfoAsync(ct)));
+
 app.MapGet("/api/v1/alerts",
     async (IAlertRepository repository, CancellationToken ct) =>
         Results.Ok(await repository.GetOpenAsync(ct)));

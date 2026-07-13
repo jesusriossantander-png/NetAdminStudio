@@ -22,6 +22,7 @@ public static class DependencyInjection
         services.AddSingleton<IArpTable, ArpTable>();
         services.AddSingleton<IVendorLookup, OuiVendorLookup>();
         services.AddSingleton<IPrinterProbe, Printers.WmiPrinterProbe>();
+        services.AddSingleton<ISystemInfoProbe, System.WmiSystemInfoProbe>();
         services.AddScoped<DemoDataSeeder>();
         return services;
     }

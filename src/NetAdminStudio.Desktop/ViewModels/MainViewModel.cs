@@ -33,6 +33,9 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
     [NotifyPropertyChangedFor(nameof(CanScan))]
     private bool isScanning;
 
+    [ObservableProperty]
+    private SystemInfoDto? localSystem;
+
     public bool CanScan => !IsScanning;
 
     public ObservableCollection<AssetDto> Assets { get; } = [];
@@ -60,6 +63,8 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
             Alerts.Clear();
             foreach (var item in await apiClient.GetAlertsAsync(cts.Token))
                 Alerts.Add(item);
+
+            LocalSystem = await apiClient.GetSystemInfoAsync(cts.Token);
 
             Status = $"Actualizado {DateTime.Now:HH:mm:ss}";
         }
