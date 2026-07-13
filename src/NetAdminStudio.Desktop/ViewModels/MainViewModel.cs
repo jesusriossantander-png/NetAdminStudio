@@ -1,5 +1,7 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -88,6 +90,88 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
         return value.Contains(',') || value.Contains('"') || value.Contains('\n')
             ? $"\"{value.Replace("\"", "\"\"")}\""
             : value;
+    }
+
+    [RelayCommand]
+    private void ExportReport()
+    {
+        var dialog = new Microsoft.Win32.SaveFileDialog
+        {
+            FileName = $"informe_{DateTime.Now:yyyyMMdd_HHmm}.html",
+            Filter = "HTML (*.html)|*.html"
+        };
+        if (dialog.ShowDialog() != true)
+            return;
+
+        File.WriteAllText(dialog.FileName, BuildReportHtml(), Encoding.UTF8);
+        Status = "Informe generado.";
+
+        try
+        {
+            Process.Start(new ProcessStartInfo(dialog.FileName) { UseShellExecute = true });
+        }
+        catch
+        {
+            // Si no se puede abrir el navegador, el archivo igual quedó guardado.
+        }
+    }
+
+    private string BuildReportHtml()
+    {
+        static string E(string? v) => WebUtility.HtmlEncode(v ?? "");
+        var sb = new StringBuilder();
+
+        sb.Append("""
+        <!doctype html><html lang="es"><head><meta charset="utf-8">
+        <title>Informe NetAdmin Studio</title><style>
+        body{font-family:Segoe UI,Arial,sans-serif;margin:32px;color:#111827;background:#f8fafc}
+        h1{margin:0 0 4px}h2{margin:28px 0 8px;color:#0f172a;border-bottom:2px solid #38BDF8;padding-bottom:4px}
+        .muted{color:#64748b}.cards{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
+        .card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 18px;min-width:120px}
+        .card b{font-size:26px;display:block}
+        table{border-collapse:collapse;width:100%;background:#fff;font-size:13px}
+        th,td{border:1px solid #e2e8f0;padding:6px 10px;text-align:left}
+        th{background:#0f172a;color:#fff}tr:nth-child(even){background:#f1f5f9}
+        </style></head><body>
+        """);
+
+        sb.Append($"<h1>NetAdmin Studio — Informe de infraestructura</h1>");
+        sb.Append($"<p class='muted'>Generado el {E(DateTime.Now.ToString("dd/MM/yyyy HH:mm"))}</p>");
+
+        if (Dashboard is { } d)
+        {
+            sb.Append("<div class='cards'>");
+            sb.Append($"<div class='card'>Activos<b>{d.Assets}</b></div>");
+            sb.Append($"<div class='card'>Online<b>{d.Online}</b></div>");
+            sb.Append($"<div class='card'>Offline<b>{d.Offline}</b></div>");
+            sb.Append($"<div class='card'>Impresoras<b>{d.Printers}</b></div>");
+            sb.Append($"<div class='card'>Alertas<b>{d.OpenAlerts}</b></div>");
+            sb.Append($"<div class='card'>Health Score<b>{d.HealthScore}% {E(d.HealthLabel)}</b></div>");
+            sb.Append("</div>");
+        }
+
+        sb.Append("<h2>Activos de red</h2><table><tr><th>IP</th><th>Nombre</th><th>Tipo</th><th>MAC</th><th>Fabricante</th><th>Puertos</th><th>Estado</th></tr>");
+        foreach (var a in Assets)
+            sb.Append($"<tr><td>{E(a.IpAddress)}</td><td>{E(a.Name)}</td><td>{E(a.TypeText)}</td><td>{E(a.MacAddress)}</td><td>{E(a.Vendor)}</td><td>{E(a.PortsText)}</td><td>{E(a.StateText)}</td></tr>");
+        sb.Append("</table>");
+
+        sb.Append("<h2>Impresoras</h2><table><tr><th>Nombre</th><th>Conexión</th><th>Modelo</th><th>Cola</th></tr>");
+        foreach (var p in Printers)
+            sb.Append($"<tr><td>{E(p.Name)}</td><td>{E(p.ConnectionType)}</td><td>{E(p.Model)}</td><td>{p.PendingJobs}</td></tr>");
+        sb.Append("</table>");
+
+        sb.Append("<h2>Permisos de carpetas compartidas</h2><table><tr><th>Recurso</th><th>Identidad</th><th>Permiso</th><th>Acceso</th></tr>");
+        foreach (var perm in Permissions)
+            sb.Append($"<tr><td>{E(perm.Share)}</td><td>{E(perm.Identity)}</td><td>{E(perm.Rights)}</td><td>{E(perm.Access)}</td></tr>");
+        sb.Append("</table>");
+
+        sb.Append("<h2>Usuarios locales</h2><table><tr><th>Usuario</th><th>Nombre completo</th><th>Estado</th></tr>");
+        foreach (var u in Users)
+            sb.Append($"<tr><td>{E(u.Name)}</td><td>{E(u.FullName)}</td><td>{E(u.StateText)}</td></tr>");
+        sb.Append("</table>");
+
+        sb.Append("</body></html>");
+        return sb.ToString();
     }
 
     [RelayCommand]

@@ -58,7 +58,9 @@
                     <Button Content="📋   Auditoría"
                             Command="{Binding NavigateCommand}" CommandParameter="auditoria"
                             Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=auditoria}"/>
-                    <Button Style="{StaticResource NavButton}" Content="📄   Informes"/>
+                    <Button Content="📄   Informes"
+                            Command="{Binding NavigateCommand}" CommandParameter="informes"
+                            Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=informes}"/>
                     <Button Content="🤖   Automatizaciones"
                             Command="{Binding NavigateCommand}" CommandParameter="automatizaciones"
                             Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=automatizaciones}"/>
@@ -107,6 +109,8 @@
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=seguridad}"/>
                 <views:AuditoriaView
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=auditoria}"/>
+                <views:InformesView
+                    Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=informes}"/>
             </Grid>
         </ScrollViewer>
     </Grid>

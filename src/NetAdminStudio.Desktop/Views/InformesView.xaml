@@ -1,0 +1,33 @@
+<UserControl x:Class="NetAdminStudio.Desktop.Views.InformesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Margin="18">
+        <StackPanel Margin="6,4,6,0">
+            <TextBlock Text="Informes" FontSize="26" FontWeight="SemiBold"/>
+            <TextBlock Text="Generá un informe completo de la infraestructura"
+                       Foreground="{StaticResource MutedBrush}"/>
+        </StackPanel>
+
+        <Border Style="{StaticResource Card}">
+            <StackPanel>
+                <TextBlock Text="Informe de infraestructura (HTML)" FontSize="16" FontWeight="SemiBold"/>
+                <TextBlock Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,6,0,0"
+                           Text="Incluye el resumen general (Health Score, equipos, alertas), el listado de activos de red, impresoras, permisos de carpetas compartidas y usuarios locales. Se guarda como archivo HTML y se abre automáticamente en el navegador."/>
+                <Button Style="{StaticResource PrimaryButton}" Content="📄  Generar informe HTML"
+                        Command="{Binding ExportReportCommand}"
+                        HorizontalAlignment="Left" Margin="0,14,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource Card}">
+            <StackPanel>
+                <TextBlock Text="Exportar inventario (CSV)" FontSize="16" FontWeight="SemiBold"/>
+                <TextBlock Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,6,0,0"
+                           Text="Exporta todos los activos de red a un archivo CSV, ideal para abrir en Excel."/>
+                <Button Content="⬇  Exportar inventario CSV"
+                        Command="{Binding ExportInventoryCommand}"
+                        HorizontalAlignment="Left" Margin="0,14,0,0"/>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>
