@@ -10,6 +10,8 @@ public sealed record DashboardDto(
     int Offline,
     int Printers,
     int OpenAlerts,
+    int HealthScore,
+    string HealthLabel,
     DateTimeOffset GeneratedAt);
 
 public sealed record AssetDto(

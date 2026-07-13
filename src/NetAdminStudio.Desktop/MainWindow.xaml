@@ -189,6 +189,18 @@
                     <StackPanel Grid.Column="1">
                         <Border Style="{StaticResource Card}">
                             <StackPanel>
+                                <TextBlock Text="Health Score Global" FontSize="16" FontWeight="SemiBold"
+                                           HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                                <controls:CircularGauge Diameter="150"
+                                    Accent="{StaticResource GreenBrush}"
+                                    Percent="{Binding Dashboard.HealthScore, Mode=OneWay, FallbackValue=0}"
+                                    Label="{Binding Dashboard.HealthLabel, Mode=OneWay}"
+                                    HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
                                 <DockPanel>
                                     <TextBlock DockPanel.Dock="Left" Text="Este equipo"
                                                FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>

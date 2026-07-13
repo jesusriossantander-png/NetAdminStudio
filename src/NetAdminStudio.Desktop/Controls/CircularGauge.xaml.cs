@@ -7,9 +7,6 @@ namespace NetAdminStudio.Desktop.Controls;
 /// <summary>Medidor circular (anillo) que muestra un porcentaje 0–100 con una etiqueta.</summary>
 public partial class CircularGauge : UserControl
 {
-    private const double Size = 98;
-    private const double Thickness = 9;
-
     public CircularGauge()
     {
         InitializeComponent();
@@ -27,6 +24,10 @@ public partial class CircularGauge : UserControl
     public static readonly DependencyProperty AccentProperty =
         DependencyProperty.Register(nameof(Accent), typeof(Brush), typeof(CircularGauge),
             new PropertyMetadata(Brushes.DeepSkyBlue, OnChanged));
+
+    public static readonly DependencyProperty DiameterProperty =
+        DependencyProperty.Register(nameof(Diameter), typeof(double), typeof(CircularGauge),
+            new PropertyMetadata(98.0, OnChanged));
 
     public double Percent
     {
@@ -46,6 +47,12 @@ public partial class CircularGauge : UserControl
         set => SetValue(AccentProperty, value);
     }
 
+    public double Diameter
+    {
+        get => (double)GetValue(DiameterProperty);
+        set => SetValue(DiameterProperty, value);
+    }
+
     private static void OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) =>
         ((CircularGauge)d).Redraw();
 
@@ -53,14 +60,25 @@ public partial class CircularGauge : UserControl
     {
         if (ArcPath is null) return;
 
+        var diameter = Diameter <= 0 ? 98 : Diameter;
+        var thickness = Math.Max(4, diameter * 0.09);
+
+        Width = diameter;
+        Height = diameter;
+        Ring.Width = diameter;
+        Ring.Height = diameter;
+        Ring.StrokeThickness = thickness;
+        ArcPath.StrokeThickness = thickness;
+        ValueText.FontSize = diameter * 0.22;
+        LabelText.FontSize = Math.Max(9, diameter * 0.11);
+
         var pct = Math.Clamp(Percent, 0, 100);
         ValueText.Text = $"{Math.Round(pct)}%";
         LabelText.Text = Label;
         ArcPath.Stroke = Accent;
 
-        var r = (Size - Thickness) / 2;
-        var cx = Size / 2;
-        var cy = Size / 2;
+        var r = (diameter - thickness) / 2;
+        var c = diameter / 2;
 
         if (pct <= 0)
         {
@@ -70,13 +88,13 @@ public partial class CircularGauge : UserControl
 
         if (pct >= 99.99)
         {
-            ArcPath.Data = new EllipseGeometry(new Point(cx, cy), r, r);
+            ArcPath.Data = new EllipseGeometry(new Point(c, c), r, r);
             return;
         }
 
         var sweep = 360 * pct / 100;
-        var start = PointOnCircle(cx, cy, r, -90);
-        var end = PointOnCircle(cx, cy, r, -90 + sweep);
+        var start = PointOnCircle(c, c, r, -90);
+        var end = PointOnCircle(c, c, r, -90 + sweep);
 
         var figure = new PathFigure { StartPoint = start, IsClosed = false };
         figure.Segments.Add(new ArcSegment(
