@@ -5,6 +5,7 @@
     <Application.Resources>
         <conv:SectionToVisibilityConverter x:Key="SectionToVisibility"/>
         <conv:SectionToNavStyleConverter x:Key="SectionToNavStyle"/>
+        <conv:ZeroToVisibilityConverter x:Key="ZeroToVisibility"/>
 
         <!-- Paleta base -->
         <SolidColorBrush x:Key="BackgroundBrush" Color="#0B1120"/>

@@ -85,6 +85,18 @@ app.MapPost("/api/v1/alerts/{id:guid}/acknowledge",
         return Results.NoContent();
     });
 
+app.MapPost("/api/v1/alerts/{id:guid}/resolve",
+    async (Guid id, IAlertRepository repository, CancellationToken ct) =>
+    {
+        var alert = await repository.GetAsync(id, ct);
+        if (alert is null)
+            return Results.NotFound();
+
+        alert.Resolve();
+        await repository.SaveAsync(alert, ct);
+        return Results.NoContent();
+    });
+
 app.MapGet("/api/v1/automations",
     async (IAutomationRepository repository, CancellationToken ct) =>
         Results.Ok(await repository.GetAllAsync(ct)));

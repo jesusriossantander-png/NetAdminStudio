@@ -74,7 +74,22 @@ public sealed record AlertDto(
     Guid SourceId,
     int Severity,
     int State,
-    DateTimeOffset OpenedAt);
+    DateTimeOffset OpenedAt)
+{
+    public string SeverityText => Severity switch
+    {
+        1 => "Advertencia",
+        2 => "Crítico",
+        _ => "Informativo"
+    };
+    public string StateText => State switch
+    {
+        1 => "Reconocida",
+        2 => "Resuelta",
+        _ => "Abierta"
+    };
+    public string OpenedText => OpenedAt.LocalDateTime.ToString("dd/MM/yyyy HH:mm");
+}
 
 public sealed record AssistantAnswerDto(
     string Text,
@@ -179,4 +194,16 @@ public sealed class NetAdminApiClient(HttpClient httpClient)
     public async Task<SystemInfoDto> GetSystemInfoAsync(CancellationToken ct) =>
         await httpClient.GetFromJsonAsync<SystemInfoDto>("/api/v1/system/local", ct)
             ?? throw new InvalidOperationException("La API devolvió información vacía del sistema.");
+
+    public async Task AcknowledgeAlertAsync(Guid id, CancellationToken ct)
+    {
+        var response = await httpClient.PostAsync($"/api/v1/alerts/{id}/acknowledge", null, ct);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task ResolveAlertAsync(Guid id, CancellationToken ct)
+    {
+        var response = await httpClient.PostAsync($"/api/v1/alerts/{id}/resolve", null, ct);
+        response.EnsureSuccessStatusCode();
+    }
 }

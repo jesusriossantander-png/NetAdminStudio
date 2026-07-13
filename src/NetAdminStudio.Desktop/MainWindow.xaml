@@ -42,7 +42,9 @@
                     <Button Style="{StaticResource NavButton}" Content="👥   Grupos"/>
                     <Button Style="{StaticResource NavButton}" Content="🔒   Seguridad"/>
                     <Button Style="{StaticResource NavButton}" Content="📦   Inventario"/>
-                    <Button Style="{StaticResource NavButton}" Content="🔔   Alertas"/>
+                    <Button Content="🔔   Alertas"
+                            Command="{Binding NavigateCommand}" CommandParameter="alertas"
+                            Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=alertas}"/>
                     <Button Style="{StaticResource NavButton}" Content="📋   Auditoría"/>
                     <Button Style="{StaticResource NavButton}" Content="📄   Informes"/>
                     <Button Style="{StaticResource NavButton}" Content="🤖   Automatizaciones"/>
@@ -71,6 +73,8 @@
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=impresoras}"/>
                 <views:EquiposView
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=equipos}"/>
+                <views:AlertasView
+                    Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=alertas}"/>
             </Grid>
         </ScrollViewer>
     </Grid>

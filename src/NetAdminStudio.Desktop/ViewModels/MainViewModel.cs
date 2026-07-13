@@ -44,6 +44,34 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
     [RelayCommand]
     private void Navigate(string section) => SelectedSection = section;
 
+    [RelayCommand]
+    private async Task AcknowledgeAlertAsync(Guid id)
+    {
+        try
+        {
+            await apiClient.AcknowledgeAlertAsync(id, CancellationToken.None);
+            await RefreshAsync();
+        }
+        catch (Exception ex)
+        {
+            Status = $"No se pudo reconocer la alerta: {ex.Message}";
+        }
+    }
+
+    [RelayCommand]
+    private async Task ResolveAlertAsync(Guid id)
+    {
+        try
+        {
+            await apiClient.ResolveAlertAsync(id, CancellationToken.None);
+            await RefreshAsync();
+        }
+        catch (Exception ex)
+        {
+            Status = $"No se pudo resolver la alerta: {ex.Message}";
+        }
+    }
+
     public ObservableCollection<AssetDto> Assets { get; } = [];
     public ObservableCollection<AssetDto> Computers { get; } = [];
     public ObservableCollection<PrinterDto> Printers { get; } = [];

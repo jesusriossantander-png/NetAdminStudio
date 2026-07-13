@@ -16,6 +16,16 @@ public sealed class SectionToVisibilityConverter : IValueConverter
         Binding.DoNothing;
 }
 
+/// <summary>Muestra el elemento (Visible) solo cuando el número es 0; si no, lo colapsa.</summary>
+public sealed class ZeroToVisibilityConverter : IValueConverter
+{
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+        value is int n && n == 0 ? Visibility.Visible : Visibility.Collapsed;
+
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+        Binding.DoNothing;
+}
+
 /// <summary>Devuelve el estilo de botón de navegación activo o normal según la sección.</summary>
 public sealed class SectionToNavStyleConverter : IValueConverter
 {
