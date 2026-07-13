@@ -1,3 +1,4 @@
+using NetAdminStudio.Api;
 using NetAdminStudio.Application;
 using NetAdminStudio.Application.Abstractions;
 using NetAdminStudio.Application.Assistant;
@@ -23,6 +24,7 @@ var connectionString = $"Data Source={Path.Combine(dataDirectory, "netadminstudi
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(connectionString);
+builder.Services.AddHostedService<MonitoringWorker>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>

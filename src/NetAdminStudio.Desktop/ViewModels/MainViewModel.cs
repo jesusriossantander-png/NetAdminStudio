@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using NetAdminStudio.Desktop.Services;
@@ -7,6 +8,17 @@ namespace NetAdminStudio.Desktop.ViewModels;
 
 public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObject
 {
+    private DispatcherTimer? _autoRefreshTimer;
+
+    /// <summary>Inicia el refresco automático del dashboard (cada 30 s).</summary>
+    public void StartAutoRefresh()
+    {
+        if (_autoRefreshTimer is not null) return;
+        _autoRefreshTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
+        _autoRefreshTimer.Tick += async (_, _) => await RefreshAsync();
+        _autoRefreshTimer.Start();
+    }
+
     [ObservableProperty]
     private DashboardDto? dashboard;
 
