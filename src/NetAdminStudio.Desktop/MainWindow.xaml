@@ -1,6 +1,7 @@
 <Window x:Class="NetAdminStudio.Desktop.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:NetAdminStudio.Desktop.Controls"
         Title="NetAdmin Studio"
         Width="1450"
         Height="900"
@@ -201,25 +202,25 @@
                                            Foreground="{StaticResource MutedBrush}" FontSize="11"
                                            TextWrapping="Wrap" Margin="0,2,0,8"/>
 
-                                <UniformGrid Columns="3">
-                                    <StackPanel>
-                                        <TextBlock Text="CPU" Foreground="{StaticResource MutedBrush}" FontSize="11"/>
-                                        <TextBlock Text="{Binding LocalSystem.CpuUsageText}" FontSize="22" FontWeight="Bold"/>
-                                    </StackPanel>
-                                    <StackPanel>
-                                        <TextBlock Text="Memoria" Foreground="{StaticResource MutedBrush}" FontSize="11"/>
-                                        <TextBlock FontSize="22" FontWeight="Bold">
-                                            <Run Text="{Binding LocalSystem.MemoryUsagePercent, Mode=OneWay}"/><Run Text="%"/>
-                                        </TextBlock>
-                                    </StackPanel>
-                                    <StackPanel>
-                                        <TextBlock Text="Servicios" Foreground="{StaticResource MutedBrush}" FontSize="11"/>
-                                        <TextBlock Text="{Binding LocalSystem.ServicesRunning}" FontSize="22" FontWeight="Bold"/>
-                                    </StackPanel>
+                                <UniformGrid Columns="3" Margin="0,4,0,0">
+                                    <controls:CircularGauge Label="CPU"
+                                        Accent="{StaticResource AccentBrush}"
+                                        Percent="{Binding LocalSystem.CpuUsagePercent, Mode=OneWay, FallbackValue=0, TargetNullValue=0}"/>
+                                    <controls:CircularGauge Label="Memoria"
+                                        Accent="{StaticResource PurpleBrush}"
+                                        Percent="{Binding LocalSystem.MemoryUsagePercent, Mode=OneWay, FallbackValue=0}"/>
+                                    <controls:CircularGauge Label="Disco C:"
+                                        Accent="{StaticResource OrangeBrush}"
+                                        Percent="{Binding LocalSystem.Disks[0].UsagePercent, Mode=OneWay, FallbackValue=0}"/>
                                 </UniformGrid>
 
-                                <TextBlock Text="{Binding LocalSystem.MemoryText}"
-                                           Foreground="{StaticResource MutedBrush}" FontSize="11" Margin="0,6,0,0"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,6,0,0">
+                                    <TextBlock Text="{Binding LocalSystem.MemoryText}"
+                                               Foreground="{StaticResource MutedBrush}" FontSize="11"/>
+                                    <TextBlock Text="  ·  " Foreground="{StaticResource MutedBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding LocalSystem.ServicesText}"
+                                               Foreground="{StaticResource MutedBrush}" FontSize="11"/>
+                                </StackPanel>
 
                                 <TextBlock Text="Discos" FontWeight="SemiBold" FontSize="12" Margin="0,10,0,4"/>
                                 <ItemsControl ItemsSource="{Binding LocalSystem.Disks}">
