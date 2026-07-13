@@ -41,7 +41,9 @@
                     <Button Style="{StaticResource NavButton}" Content="👤   Usuarios"/>
                     <Button Style="{StaticResource NavButton}" Content="👥   Grupos"/>
                     <Button Style="{StaticResource NavButton}" Content="🔒   Seguridad"/>
-                    <Button Style="{StaticResource NavButton}" Content="📦   Inventario"/>
+                    <Button Content="📦   Inventario"
+                            Command="{Binding NavigateCommand}" CommandParameter="inventario"
+                            Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=inventario}"/>
                     <Button Content="🔔   Alertas"
                             Command="{Binding NavigateCommand}" CommandParameter="alertas"
                             Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=alertas}"/>
@@ -75,6 +77,8 @@
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=equipos}"/>
                 <views:AlertasView
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=alertas}"/>
+                <views:InventarioView
+                    Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=inventario}"/>
             </Grid>
         </ScrollViewer>
     </Grid>

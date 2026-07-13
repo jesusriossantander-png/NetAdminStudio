@@ -1,0 +1,44 @@
+<UserControl x:Class="NetAdminStudio.Desktop.Views.InventarioView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Margin="18">
+        <DockPanel Margin="6,4,6,0">
+            <StackPanel DockPanel.Dock="Left">
+                <TextBlock Text="Inventario" FontSize="26" FontWeight="SemiBold"/>
+                <TextBlock Text="Todos los activos registrados en la infraestructura"
+                           Foreground="{StaticResource MutedBrush}"/>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Content="↻  Actualizar" Command="{Binding RefreshCommand}"/>
+                <Button Style="{StaticResource PrimaryButton}" Content="⬇  Exportar CSV"
+                        Command="{Binding ExportInventoryCommand}"/>
+            </StackPanel>
+        </DockPanel>
+
+        <Border Style="{StaticResource Card}">
+            <StackPanel>
+                <DockPanel Margin="0,0,0,10">
+                    <TextBlock Text="Activos" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                    <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right"
+                               Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center">
+                        <Run Text="{Binding Assets.Count, Mode=OneWay}"/><Run Text=" activos"/>
+                    </TextBlock>
+                </DockPanel>
+                <DataGrid ItemsSource="{Binding Assets}"
+                          AutoGenerateColumns="False" IsReadOnly="True"
+                          Height="560">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="IP" Binding="{Binding IpAddress}" Width="120"/>
+                        <DataGridTextColumn Header="Nombre / Host" Binding="{Binding Name}" Width="200"/>
+                        <DataGridTextColumn Header="Tipo" Binding="{Binding TypeText}" Width="120"/>
+                        <DataGridTextColumn Header="MAC" Binding="{Binding MacAddress}" Width="150"/>
+                        <DataGridTextColumn Header="Fabricante" Binding="{Binding Vendor}" Width="120"/>
+                        <DataGridTextColumn Header="Puertos" Binding="{Binding PortsText}" Width="160"/>
+                        <DataGridTextColumn Header="Estado" Binding="{Binding StateText}" Width="100"/>
+                        <DataGridTextColumn Header="Origen" Binding="{Binding Origin}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>

@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Text;
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -55,6 +57,38 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
 
     [RelayCommand]
     private void Navigate(string section) => SelectedSection = section;
+
+    [RelayCommand]
+    private void ExportInventory()
+    {
+        var dialog = new Microsoft.Win32.SaveFileDialog
+        {
+            FileName = $"inventario_{DateTime.Now:yyyyMMdd_HHmm}.csv",
+            Filter = "CSV (*.csv)|*.csv"
+        };
+        if (dialog.ShowDialog() != true)
+            return;
+
+        var sb = new StringBuilder();
+        sb.AppendLine("IP,Nombre,Tipo,MAC,Fabricante,Puertos,Estado,Origen");
+        foreach (var a in Assets)
+            sb.AppendLine(string.Join(",", new[]
+            {
+                Csv(a.IpAddress), Csv(a.Name), Csv(a.TypeText), Csv(a.MacAddress),
+                Csv(a.Vendor), Csv(a.PortsText), Csv(a.StateText), Csv(a.Origin)
+            }));
+
+        File.WriteAllText(dialog.FileName, sb.ToString(), Encoding.UTF8);
+        Status = $"Inventario exportado ({Assets.Count} activos).";
+    }
+
+    private static string Csv(string? value)
+    {
+        value ??= "";
+        return value.Contains(',') || value.Contains('"') || value.Contains('\n')
+            ? $"\"{value.Replace("\"", "\"\"")}\""
+            : value;
+    }
 
     [RelayCommand]
     private async Task AcknowledgeAlertAsync(Guid id)
