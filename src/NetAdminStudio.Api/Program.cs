@@ -83,6 +83,10 @@ app.MapGet("/api/v1/groups/local",
     async (IGroupProbe probe, CancellationToken ct) =>
         Results.Ok(await probe.GetLocalGroupsAsync(ct)));
 
+app.MapGet("/api/v1/security/share-permissions",
+    async (IPermissionProbe probe, CancellationToken ct) =>
+        Results.Ok(await probe.GetSharePermissionsAsync(ct)));
+
 app.MapGet("/api/v1/alerts",
     async (IAlertRepository repository, CancellationToken ct) =>
         Results.Ok(await repository.GetOpenAsync(ct)));

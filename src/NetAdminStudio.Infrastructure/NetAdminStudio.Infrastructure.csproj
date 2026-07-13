@@ -5,6 +5,7 @@
     <NoWarn>$(NoWarn);CA1416</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="System.IO.FileSystem.AccessControl" Version="5.0.0" />
     <PackageReference Include="System.Management" Version="8.0.0" />
     <ProjectReference Include="..\NetAdminStudio.Application\NetAdminStudio.Application.csproj" />
     <ProjectReference Include="..\NetAdminStudio.Domain\NetAdminStudio.Domain.csproj" />

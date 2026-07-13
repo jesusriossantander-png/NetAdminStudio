@@ -108,6 +108,9 @@ public sealed record LocalUserDto(string Name, string? FullName, bool Disabled, 
 
 public sealed record LocalGroupDto(string Name, string? Description);
 
+public sealed record FolderPermissionDto(
+    string Share, string Path, string Identity, string Rights, string Access);
+
 public sealed record AutomationDto(
     Guid Id,
     string Name,
@@ -227,6 +230,10 @@ public sealed class NetAdminApiClient(HttpClient httpClient)
 
     public async Task<List<LocalGroupDto>> GetGroupsAsync(CancellationToken ct) =>
         await httpClient.GetFromJsonAsync<List<LocalGroupDto>>("/api/v1/groups/local", ct) ?? [];
+
+    public async Task<List<FolderPermissionDto>> GetSharePermissionsAsync(CancellationToken ct) =>
+        await httpClient.GetFromJsonAsync<List<FolderPermissionDto>>(
+            "/api/v1/security/share-permissions", ct) ?? [];
 
     public async Task AcknowledgeAlertAsync(Guid id, CancellationToken ct)
     {
