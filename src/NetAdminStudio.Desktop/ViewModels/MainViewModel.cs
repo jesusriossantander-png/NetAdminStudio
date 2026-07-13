@@ -123,6 +123,8 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
     public ObservableCollection<PrinterDto> Printers { get; } = [];
     public ObservableCollection<AlertDto> Alerts { get; } = [];
     public ObservableCollection<AutomationDto> Automations { get; } = [];
+    public ObservableCollection<SharedFolderDto> Shares { get; } = [];
+    public ObservableCollection<LocalUserDto> Users { get; } = [];
 
     [RelayCommand]
     private async Task RefreshAsync()
@@ -157,6 +159,14 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
             Automations.Clear();
             foreach (var item in await apiClient.GetAutomationsAsync(cts.Token))
                 Automations.Add(item);
+
+            Shares.Clear();
+            foreach (var item in await apiClient.GetSharesAsync(cts.Token))
+                Shares.Add(item);
+
+            Users.Clear();
+            foreach (var item in await apiClient.GetUsersAsync(cts.Token))
+                Users.Add(item);
 
             Status = $"Actualizado {DateTime.Now:HH:mm:ss}";
         }

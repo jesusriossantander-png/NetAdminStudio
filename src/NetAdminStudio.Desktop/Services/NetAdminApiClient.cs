@@ -99,6 +99,13 @@ public sealed record ScanStartedDto(Guid ScanId);
 
 public sealed record PrinterScanResultDto(int Discovered);
 
+public sealed record SharedFolderDto(string Name, string? Path, string? Description, string ShareType);
+
+public sealed record LocalUserDto(string Name, string? FullName, bool Disabled, string? Description)
+{
+    public string StateText => Disabled ? "Deshabilitada" : "Activa";
+}
+
 public sealed record AutomationDto(
     Guid Id,
     string Name,
@@ -209,6 +216,12 @@ public sealed class NetAdminApiClient(HttpClient httpClient)
 
     public async Task<List<AutomationDto>> GetAutomationsAsync(CancellationToken ct) =>
         await httpClient.GetFromJsonAsync<List<AutomationDto>>("/api/v1/automations", ct) ?? [];
+
+    public async Task<List<SharedFolderDto>> GetSharesAsync(CancellationToken ct) =>
+        await httpClient.GetFromJsonAsync<List<SharedFolderDto>>("/api/v1/shares/local", ct) ?? [];
+
+    public async Task<List<LocalUserDto>> GetUsersAsync(CancellationToken ct) =>
+        await httpClient.GetFromJsonAsync<List<LocalUserDto>>("/api/v1/users/local", ct) ?? [];
 
     public async Task AcknowledgeAlertAsync(Guid id, CancellationToken ct)
     {

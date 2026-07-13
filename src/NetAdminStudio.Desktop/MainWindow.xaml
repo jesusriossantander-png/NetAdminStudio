@@ -37,8 +37,12 @@
                     <Button Content="🖥️   Equipos"
                             Command="{Binding NavigateCommand}" CommandParameter="equipos"
                             Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=equipos}"/>
-                    <Button Style="{StaticResource NavButton}" Content="📁   Carpetas"/>
-                    <Button Style="{StaticResource NavButton}" Content="👤   Usuarios"/>
+                    <Button Content="📁   Carpetas"
+                            Command="{Binding NavigateCommand}" CommandParameter="carpetas"
+                            Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=carpetas}"/>
+                    <Button Content="👤   Usuarios"
+                            Command="{Binding NavigateCommand}" CommandParameter="usuarios"
+                            Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=usuarios}"/>
                     <Button Style="{StaticResource NavButton}" Content="👥   Grupos"/>
                     <Button Style="{StaticResource NavButton}" Content="🔒   Seguridad"/>
                     <Button Content="📦   Inventario"
@@ -87,6 +91,10 @@
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=automatizaciones}"/>
                 <views:ConfiguracionView
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=configuracion}"/>
+                <views:CarpetasView
+                    Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=carpetas}"/>
+                <views:UsuariosView
+                    Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=usuarios}"/>
             </Grid>
         </ScrollViewer>
     </Grid>

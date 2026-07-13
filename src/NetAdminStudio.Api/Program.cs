@@ -71,6 +71,14 @@ app.MapGet("/api/v1/system/local",
     async (ISystemInfoProbe probe, CancellationToken ct) =>
         Results.Ok(await probe.GetLocalSystemInfoAsync(ct)));
 
+app.MapGet("/api/v1/shares/local",
+    async (IShareProbe probe, CancellationToken ct) =>
+        Results.Ok(await probe.GetLocalSharesAsync(ct)));
+
+app.MapGet("/api/v1/users/local",
+    async (IUserProbe probe, CancellationToken ct) =>
+        Results.Ok(await probe.GetLocalUsersAsync(ct)));
+
 app.MapGet("/api/v1/alerts",
     async (IAlertRepository repository, CancellationToken ct) =>
         Results.Ok(await repository.GetOpenAsync(ct)));
