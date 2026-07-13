@@ -45,6 +45,7 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
     private void Navigate(string section) => SelectedSection = section;
 
     public ObservableCollection<AssetDto> Assets { get; } = [];
+    public ObservableCollection<AssetDto> Computers { get; } = [];
     public ObservableCollection<PrinterDto> Printers { get; } = [];
     public ObservableCollection<AlertDto> Alerts { get; } = [];
 
@@ -59,8 +60,14 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
             Dashboard = await apiClient.GetDashboardAsync(cts.Token);
 
             Assets.Clear();
+            Computers.Clear();
             foreach (var item in await apiClient.GetAssetsAsync(cts.Token))
+            {
                 Assets.Add(item);
+                // Equipos = servidores, workstations, Raspberry Pi.
+                if (item.Type is 5 or 6 or 7)
+                    Computers.Add(item);
+            }
 
             Printers.Clear();
             foreach (var item in await apiClient.GetPrintersAsync(cts.Token))

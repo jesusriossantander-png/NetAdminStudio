@@ -34,7 +34,9 @@
                     <Button Content="🖨️   Impresoras"
                             Command="{Binding NavigateCommand}" CommandParameter="impresoras"
                             Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=impresoras}"/>
-                    <Button Style="{StaticResource NavButton}" Content="🖥️   Equipos"/>
+                    <Button Content="🖥️   Equipos"
+                            Command="{Binding NavigateCommand}" CommandParameter="equipos"
+                            Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=equipos}"/>
                     <Button Style="{StaticResource NavButton}" Content="📁   Carpetas"/>
                     <Button Style="{StaticResource NavButton}" Content="👤   Usuarios"/>
                     <Button Style="{StaticResource NavButton}" Content="👥   Grupos"/>
@@ -67,6 +69,8 @@
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=red}"/>
                 <views:ImpresorasView
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=impresoras}"/>
+                <views:EquiposView
+                    Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=equipos}"/>
             </Grid>
         </ScrollViewer>
     </Grid>
