@@ -106,6 +106,8 @@ public sealed record LocalUserDto(string Name, string? FullName, bool Disabled, 
     public string StateText => Disabled ? "Deshabilitada" : "Activa";
 }
 
+public sealed record LocalGroupDto(string Name, string? Description);
+
 public sealed record AutomationDto(
     Guid Id,
     string Name,
@@ -222,6 +224,9 @@ public sealed class NetAdminApiClient(HttpClient httpClient)
 
     public async Task<List<LocalUserDto>> GetUsersAsync(CancellationToken ct) =>
         await httpClient.GetFromJsonAsync<List<LocalUserDto>>("/api/v1/users/local", ct) ?? [];
+
+    public async Task<List<LocalGroupDto>> GetGroupsAsync(CancellationToken ct) =>
+        await httpClient.GetFromJsonAsync<List<LocalGroupDto>>("/api/v1/groups/local", ct) ?? [];
 
     public async Task AcknowledgeAlertAsync(Guid id, CancellationToken ct)
     {

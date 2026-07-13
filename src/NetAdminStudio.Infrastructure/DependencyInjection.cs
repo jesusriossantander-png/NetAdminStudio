@@ -25,6 +25,7 @@ public static class DependencyInjection
         services.AddSingleton<ISystemInfoProbe, System.WmiSystemInfoProbe>();
         services.AddSingleton<IShareProbe, System.WmiShareProbe>();
         services.AddSingleton<IUserProbe, System.WmiUserProbe>();
+        services.AddSingleton<IGroupProbe, System.WmiGroupProbe>();
         services.AddScoped<DemoDataSeeder>();
         return services;
     }

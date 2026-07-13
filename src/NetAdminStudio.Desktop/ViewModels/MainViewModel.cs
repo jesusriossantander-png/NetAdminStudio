@@ -125,6 +125,7 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
     public ObservableCollection<AutomationDto> Automations { get; } = [];
     public ObservableCollection<SharedFolderDto> Shares { get; } = [];
     public ObservableCollection<LocalUserDto> Users { get; } = [];
+    public ObservableCollection<LocalGroupDto> Groups { get; } = [];
 
     [RelayCommand]
     private async Task RefreshAsync()
@@ -167,6 +168,10 @@ public partial class MainViewModel(NetAdminApiClient apiClient) : ObservableObje
             Users.Clear();
             foreach (var item in await apiClient.GetUsersAsync(cts.Token))
                 Users.Add(item);
+
+            Groups.Clear();
+            foreach (var item in await apiClient.GetGroupsAsync(cts.Token))
+                Groups.Add(item);
 
             Status = $"Actualizado {DateTime.Now:HH:mm:ss}";
         }

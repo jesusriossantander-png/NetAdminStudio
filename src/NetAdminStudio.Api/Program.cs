@@ -79,6 +79,10 @@ app.MapGet("/api/v1/users/local",
     async (IUserProbe probe, CancellationToken ct) =>
         Results.Ok(await probe.GetLocalUsersAsync(ct)));
 
+app.MapGet("/api/v1/groups/local",
+    async (IGroupProbe probe, CancellationToken ct) =>
+        Results.Ok(await probe.GetLocalGroupsAsync(ct)));
+
 app.MapGet("/api/v1/alerts",
     async (IAlertRepository repository, CancellationToken ct) =>
         Results.Ok(await repository.GetOpenAsync(ct)));

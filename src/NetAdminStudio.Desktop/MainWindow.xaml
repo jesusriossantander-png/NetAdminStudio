@@ -43,7 +43,9 @@
                     <Button Content="👤   Usuarios"
                             Command="{Binding NavigateCommand}" CommandParameter="usuarios"
                             Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=usuarios}"/>
-                    <Button Style="{StaticResource NavButton}" Content="👥   Grupos"/>
+                    <Button Content="👥   Grupos"
+                            Command="{Binding NavigateCommand}" CommandParameter="grupos"
+                            Style="{Binding SelectedSection, Converter={StaticResource SectionToNavStyle}, ConverterParameter=grupos}"/>
                     <Button Style="{StaticResource NavButton}" Content="🔒   Seguridad"/>
                     <Button Content="📦   Inventario"
                             Command="{Binding NavigateCommand}" CommandParameter="inventario"
@@ -95,6 +97,8 @@
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=carpetas}"/>
                 <views:UsuariosView
                     Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=usuarios}"/>
+                <views:GruposView
+                    Visibility="{Binding SelectedSection, Converter={StaticResource SectionToVisibility}, ConverterParameter=grupos}"/>
             </Grid>
         </ScrollViewer>
     </Grid>
